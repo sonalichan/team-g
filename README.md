@@ -1,6 +1,6 @@
 # INFO 442 Team G
 
-**Team Name:** Team GoalKeeper
+**Team Name:** Team Gerbils
 
 ## Team Members
 
