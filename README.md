@@ -4,7 +4,7 @@
 
 ## Team Members
 
-* Eugene Lim (Project Manager)
+* Sonali Chandra (Project Manager)
 * Mengjiao Li (Designer)
 * Olivia Nguyen (Developer)
 
