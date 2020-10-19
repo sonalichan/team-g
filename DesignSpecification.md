@@ -12,8 +12,6 @@ Now more than ever, it’s important for students to keep a schedule of their ro
 
 As important as it is to keep a schedule, it is also important to motivate students to engage in time management. Through research it has been shown that time management is a universal problem. Children develop their time management skills at a different pace. And for many, time management is still a trouble after adulthood. So how can we motivate students to engage and practice in time management at an early age?  
 
-***
-
 Solution
 ---
 
