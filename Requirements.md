@@ -4,7 +4,7 @@
 
 ### **RQ-US-1**: Users must be able to sign up.
 
-- Data fields must contain 
+- Data fields must contain the following:
     - Name
     - Email address
     - Preferred password
@@ -21,7 +21,7 @@
 
 ### **RQ-US-2**: Users must be able to log in to the site
 
-- Data fields must contain email address, password
+- Data fields must contain an email address and a password
     - Email address and password are input boxes
 - System will detect if the email address is in our database. If it does not match, we will prompt the user with “This email address is not found”.
 - If the email address is in the database, and the stored password matches up with the user's input, we must allow them to log-in.
@@ -38,7 +38,7 @@
 
 ### **RQ-C-1**: Users must be able to adjust calendar settings.
 
-- Data fields include a title/description of their current week, calendar’s time preference, and calendar day’s time range, stating start time and end time. 
+- Data fields include a title/description of their current week, calendar’s time preference, and calendar day’s time range, stating that week's start time and end time. 
 - The title/description of their current week is stored as a string
     - Max. 50 characters (accepts all characters, including special characters and emojis)
 - The calendar’s time preference includes two options: “24hr time system” or “12 hr(AM/PM) time system”. 
@@ -55,12 +55,12 @@
 
 - Events consist of the following data: the date, if the event is a one time event, the start time, the end time, and description of the event.
     - The "title” refers to what the user wants to name the event
-    - The "date” refers to the day the event is happening on. 
+    - The "date” refers to the day the event is scheduled to occur on. 
         - Input box with placeholder “MM-DD-YY”
         - Date will be stored in the format of “MM-DD-YY”. 
         - If the date the user inputted is outside the current calendar week, we will prompt them “Gerbil cannot remember this far away. Choose a date within this week”.
     - “Is this an all-day event?”
-        - Check box
+        - A check box will be available to select
         - If the user checks the box, we will not display the start time and end time’s input box
         - If the user did not check the box, we will include an input box for start time of the event and an input box for end time of the event
     - The "start time” and the "end time”
