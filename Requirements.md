@@ -136,4 +136,4 @@
 ### **RQ-RS-6**: Users must be able to recieve reward once displayed requirements are met
 
 - Users must be able to view a "reward image" in place of a requirement once they meet that requirement.
-    -"Reward images" are images created by the designer(s), and will show our Gerbil mascot travelling to well known places all over the world
+    - "Reward images" are images created by the designer(s), and will show our Gerbil mascot travelling to well known places all over the world
