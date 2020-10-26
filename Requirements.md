@@ -9,12 +9,12 @@
     - Email address
     - Preferred password
 - “Name” must be stored as a string
-    - maximum 50 characters.
+    - Maximum 50 characters
 - “Email address” must be stored as a string
-    - maximum 20 characters
-    - contains one “@” symbol.
+    - Maximum 20 characters
+    - contains one “@” symbol
 - “Password” must be stored as a string
-    - minimum 8 characters
+    - Minimum 8 characters
     - case-sensitive
 - Name, email, and password should be stored inside the database, in which email is used as a key to identify users
     - Name and password are properties associated with the users
