@@ -4,7 +4,7 @@
 
 ### **RQ-US-1**: Users must be able to sign up.
 
-- Data fields must contain 
+- Data fields must contain each of the following: 
     - Name
     - Email address
     - Preferred password.
@@ -116,11 +116,11 @@
 
 ### **RQ-RS-3**: Users must be able to see the requirements for some of the obtaining award items
 
-- User will be able to view which rewards are locked or unlocked, and looking at each image’s respective requirements to unlock
+- User will be able to view which rewards are locked or unlocked, by looking at each image’s respective requirements to unlock
 
 ### **RQ-RS-4**: Users must not be able to see the requirements for award items that we choose to keep earning condition as secret.
 
-- The user will be unable to view ‘secret’ rewards, which will be greyed out, until requirements are met
+- The user will be unable to view ‘secret’ rewards, which will be greyed out, until the secret requirements are met
 
 ### **RQ-RS-5**: Users must not be able to access rewards until requirements have been met
 
