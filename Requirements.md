@@ -38,7 +38,7 @@
 
 ### **RQ-C-1**: Users must be able to adjust calendar settings.
 
-- Data fields include a title/description of their current week, calendar’s time preference, and calendar day’s time range, stating start time and end time for day time . 
+- Data fields include a title/description of their current week, calendar’s time preference, and calendar day’s time range, stating the start time and end time for that day. 
 - The title/description of their current week is stored as string, max. 50 characters (accepts all characters, including special characters and emojis)
 - The calendar’s time preference includes two options: “24hr time system” or “12 hr(AM/PM) time system”. 
     - There must be two radio buttons, which only allows the user to choose one of the systems. 
@@ -53,10 +53,10 @@
 
 - Events consist of the following data: the date, if the event is a one time event, the start time, the end time, and description of the event.
     - “The title” refers to what the user wants to call the event
-    - “The date” refers to the day the event is happening on. 
+    - “The date” refers to the day the event is scheduled to occur. 
         - Input box with placeholder “MM-DD-YY”
         - Date will be stored in the format of “MM-DD-YY”. 
-        - If the date the user inputted is outside the current calendar week, we will prompt them “Gerbil cannot remember this far away. Choose a date within this week”.
+        - If the date the user input is outside the current calendar week, they will be prompted “Gerbil cannot remember this far away. Choose a date within this week”.
     - “Is this an all-day event?”
         - Check box
         - If the user checks the box, we will not display the start time and end time’s input box
@@ -106,7 +106,7 @@
 
 ## **Reward System**
 
-### **RQ-RS-1**: After logged in, users must be able to access gift gallery from the top nav
+### **RQ-RS-1**: After the user has logged in, the user must be able to access gift gallery from the top nav
 
 - Users must not be able to access gift gallery from the top nav if they are not logged in
 
