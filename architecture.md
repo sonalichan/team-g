@@ -79,8 +79,12 @@
     - If user clicked on "log-out" on the top right corner, UserControllerView can ask the **UserController** to refresh user status
     - If user clicked on "gift gallery", UserControllerView can ask the **UserController** to display the Rewards page if the user has logged in
 
-## Stub
 
+# UserControllerView
+## Description
+- This component only resides on the **client**.
+
+## Stub
 **IfLogin:** Check if the user is logged in. True if yes, false if no
 <ul>
 
@@ -111,12 +115,6 @@
 
 </ul>
 
-# CalendarController:
-## Description
-- This component only resides on the **client**.
-
-
-## Stub
 
 **GenerateGerbilNote:** Generates a note from a set of predetermined notes to display onto the current calendar week view
 <ul>
@@ -154,7 +152,7 @@
 
     function RemoveEvent(int id) {
         // TO-DO: ADD CODE HERE
-        return;
+        return void;
     }
 
 </ul>
@@ -164,7 +162,7 @@
 
     function RemoveTask(int id) {
         // TO-DO: ADD CODE HERE
-        return;
+        return void;
     }
 
 </ul>
