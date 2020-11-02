@@ -90,17 +90,17 @@
 
 ## Stub
 
-**GenerateGerbilNote:** Generate a note from a set of predetermined notes to display onto the current calendar week view.
+**GenerateGerbilNote:** Generates a note from a set of predetermined notes to display onto the current calendar week view
 <ul>
 
     function GenerateGerbilNote() {
         // TO-DO: ADD CODE HERE
-        return ;
+        return String;
     }
 
 </ul>
 
-**AddEvent:** Parse the event object into a string to be store in the FirebaseModel
+**AddEvent:** Parse the event object into a string to be stored in the FirebaseModel
  <ul>
 
     function AddEvent(String time, String description, String name) {
@@ -110,13 +110,13 @@
 
 </ul>
 
-**AddTask:** Parse task object into a string to be store in the FirebaseModel
+**AddTask:** Parse task object into a string to be stored in the FirebaseModel
 
  <ul>
 
-    function AddTask(String Input) {
+    function AddTask(Object task) {
         // TO-DO: ADD CODE HERE
-        return ;
+        return String;
     }
 
 </ul>
@@ -173,7 +173,7 @@
  **RetrieveImage**: If the user has unlocked a reward, retrieve the reward image’s URL
  <ul>
 
-    function RetrieveImage(???) {
+    function RetrieveImage() {
         // TO-DO: ADD CODE HERE
         return String;
     }
@@ -183,9 +183,9 @@
 **HasUnlocked:** Check if user has unlocked a gift. True if yes, False if no
  <ul>
 
-    HasUnlocked(???) {
+    Boolean HasUnlocked() {
         // TO-DO: ADD CODE HERE
-        return ;
+        return 0;
     }
 
 </ul>
@@ -193,9 +193,9 @@
 **HasMetCriteria:** Check if user has unlocked a gift. True if yes, False if no
  <ul>
 
-    function () {
+    Boolean HasMetCritera() {
         // TO-DO: ADD CODE HERE
-        return boolean;
+        return 0;
     }
 
 </ul>
