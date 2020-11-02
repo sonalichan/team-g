@@ -79,9 +79,37 @@
     - If user clicked on "log-out" on the top right corner, UserControllerView can ask the **UserController** to refresh user status
     - If user clicked on "gift gallery", UserControllerView can ask the **UserController** to display the Rewards page if the user has logged in
 
- 
+## Stub
 
+**IfLogin:** Check if the user is logged in. True if yes, false if no
+<ul>
 
+    function IfLogin() {
+        // TO-DO: ADD CODE HERE
+        return Boolean;
+    }
+
+</ul>
+
+**ShowLogin:** If the is user is NOT logged in, display the login page to the user
+<ul>
+
+    function IfLogin() {
+        // TO-DO: ADD CODE HERE
+        return void;
+    }
+
+</ul>
+
+**ShowRewards:** If the is user is logged in, enable user to display Rewards page
+<ul>
+
+    function IfLogin() {
+        // TO-DO: ADD CODE HERE
+        return void;
+    }
+
+</ul>
 
 # CalendarController:
 ## Description
