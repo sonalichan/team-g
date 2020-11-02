@@ -126,7 +126,7 @@
 
     function RemoveEvent(int id) {
         // TO-DO: ADD CODE HERE
-        return ;
+        return;
     }
 
 </ul>
@@ -136,7 +136,7 @@
 
     function RemoveTask(int id) {
         // TO-DO: ADD CODE HERE
-        return ;
+        return;
     }
 
 </ul>
