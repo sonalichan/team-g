@@ -79,28 +79,54 @@
     - If user clicked on "log-out" on the top right corner, UserControllerView can ask the **UserController** to refresh user status
     - If user clicked on "gift gallery", UserControllerView can ask the **UserController** to display the Rewards page if the user has logged in
 
- 
 
-
-
-# CalendarController:
+# UserControllerView
 ## Description
 - This component only resides on the **client**.
 
-
 ## Stub
-
-**GenerateGerbilNote:** Generate a note from a set of predetermined notes to display onto the current calendar week view.
+**IfLogin:** Check if the user is logged in. True if yes, false if no
 <ul>
 
-    function GenerateGerbilNote() {
+    function IfLogin() {
         // TO-DO: ADD CODE HERE
-        return ;
+        return Boolean;
     }
 
 </ul>
 
-**AddEvent:** Parse the event object into a string to be store in the FirebaseModel
+**ShowLogin:** If the is user is NOT logged in, display the login page to the user
+<ul>
+
+    function IfLogin() {
+        // TO-DO: ADD CODE HERE
+        return void;
+    }
+
+</ul>
+
+**ShowRewards:** If the is user is logged in, enable user to display Rewards page
+<ul>
+
+    function IfLogin() {
+        // TO-DO: ADD CODE HERE
+        return void;
+    }
+
+</ul>
+
+
+**GenerateGerbilNote:** Generates a note from a set of predetermined notes to display onto the current calendar week view
+<ul>
+
+    function GenerateGerbilNote() {
+        // TO-DO: ADD CODE HERE
+        return String;
+    }
+
+</ul>
+
+**AddEvent:** Parse the event object into a string to be stored in the FirebaseModel
  <ul>
 
     function AddEvent(String time, String description, String name) {
@@ -110,13 +136,13 @@
 
 </ul>
 
-**AddTask:** Parse task object into a string to be store in the FirebaseModel
+**AddTask:** Parse task object into a string to be stored in the FirebaseModel
 
  <ul>
 
-    function AddTask(String Input) {
+    function AddTask(Object task) {
         // TO-DO: ADD CODE HERE
-        return ;
+        return String;
     }
 
 </ul>
@@ -126,7 +152,7 @@
 
     function RemoveEvent(int id) {
         // TO-DO: ADD CODE HERE
-        return ;
+        return void;
     }
 
 </ul>
@@ -136,7 +162,7 @@
 
     function RemoveTask(int id) {
         // TO-DO: ADD CODE HERE
-        return ;
+        return void;
     }
 
 </ul>
@@ -173,7 +199,7 @@
  **RetrieveImage**: If the user has unlocked a reward, retrieve the reward image’s URL
  <ul>
 
-    function RetrieveImage(???) {
+    function RetrieveImage() {
         // TO-DO: ADD CODE HERE
         return String;
     }
@@ -183,9 +209,9 @@
 **HasUnlocked:** Check if user has unlocked a gift. True if yes, False if no
  <ul>
 
-    HasUnlocked(???) {
+    Boolean HasUnlocked() {
         // TO-DO: ADD CODE HERE
-        return ;
+        return 0;
     }
 
 </ul>
@@ -193,9 +219,9 @@
 **HasMetCriteria:** Check if user has unlocked a gift. True if yes, False if no
  <ul>
 
-    function () {
+    Boolean HasMetCritera() {
         // TO-DO: ADD CODE HERE
-        return boolean;
+        return 0;
     }
 
 </ul>
