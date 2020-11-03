@@ -1,0 +1,36 @@
+  
+@import url('https://fonts.googleapis.com/css?family=Krub:400,500,600,700');
+@import url('https://fonts.googleapis.com/css2?family=Mali:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
+
+/*** Home Page ***/
+#homePage {
+    height: 100%;
+    width: 100%;
+}
+
+
+#homePage div.gerbil-message {
+    display: block;
+    position: absolute;
+    width: 40vw;
+    height: 593px;
+    left: 8vw;
+    top: 20vh;
+
+}
+
+#homePage div.gerbil-message p {
+    font-family: Mali;
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 39px;
+
+}
+
+#homePage div.gerbil-img{
+    position: absolute;
+    width: 666px;
+    height: 506px;
+    right: 15vw;
+    bottom: 10vh;
+}
