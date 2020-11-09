@@ -24,6 +24,13 @@ What tools will you use to communicate?
 - As an alternative, when someone can’t be reached through discord: email to notify them.
 - Text as another alternative
 
+For all of the requirements, how will your verifications be integrated into your process? Will you run automated tests after every build? Before every commit? When will you conduct inspections and who will be involved?
+
+- Our verifications will be integrated into our process by (whenever possible) testing out each feature when it and all other associated features are complete. We will run each test again at the entire program’s completion to ensure everything is functional and works as specified.
+- We will run tests before every commit to ensure that we don’t introduce new- not all may be automated, and our tests should be easy to do manually.
+- We will conduct inspections when the program is largely complete, to be able to as much as possible. Dev will mainly be responsible for inspections, but designer and PM may be involved as well if necessary.
+
+
 Who will own components in your architecture?
 Owning them means being responsible for writing them and making sure they are functional and correct.
 
@@ -213,7 +220,12 @@ How will you verify that you've met your requirements?
        * After user creates an event: calendar must refresh to show new events, and display already created events
        * Events must not disappear unless a user cancels event, or starts new calendar week
    * Extra tests:
-   
+   Extra tests:
+   * Trying to create events exceeding calendar week’s max capacity of events
+   * Trying to create an event that conflicts with another event’s time, on the same day
+   * Deleting an event that takes place on the same day as a newly added event
+   * Performing and confirming any action that would require the calendar page to update itself and refresh existing events
+
 - **RQ - C - 6:** If, during event creation, the user doesn’t fill out all required fields when making an event, the user will be prevented from creating the event
    * This requirement is an interaction design requirement
    * This requirement can be tested after RQ-US-2 has tested
