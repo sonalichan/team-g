@@ -209,7 +209,7 @@ How will you verify that you've met your requirements?
        * User clicks the cancel or x  button on the modal
        * User exits the “Create an Event” modal
        * User should not be able to see the cancelled event on their calendar
-     * Extra Tests:
+    * Extra Tests:
        * Event information should not show up in the database
        
 - **RQ - C - 5:** Created events must be visible on the calendar once the user adds the event onto the calendar
@@ -220,11 +220,10 @@ How will you verify that you've met your requirements?
        * After user creates an event: calendar must refresh to show new events, and display already created events
        * Events must not disappear unless a user cancels event, or starts new calendar week
    * Extra tests:
-   Extra tests:
-   * Trying to create events exceeding calendar week’s max capacity of events
-   * Trying to create an event that conflicts with another event’s time, on the same day
-   * Deleting an event that takes place on the same day as a newly added event
-   * Performing and confirming any action that would require the calendar page to update itself and refresh existing events
+       * Trying to create events exceeding calendar week’s max capacity of events
+       * Trying to create an event that conflicts with another event’s time, on the same day
+       * Deleting an event that takes place on the same day as a newly added event
+       * Performing and confirming any action that would require the calendar page to update itself and refresh existing events
 
 - **RQ - C - 6:** If, during event creation, the user doesn’t fill out all required fields when making an event, the user will be prevented from creating the event
    * This requirement is an interaction design requirement
@@ -286,7 +285,6 @@ How will you verify that you've met your requirements?
        * Users click on the avatar on the top right corner
        * Users click on the gift gallery under the dropdown
        * Users enters gift gallery
-Extra test:
 
 - **RQ - RS - 2:** Users must be able to see received awarded item through gift gallery
    * This requirement is an interaction design requirement
@@ -323,7 +321,7 @@ Extra test:
 - **RQ - RS -7:** Users must be able to access reward if they have unlocked respective requirement
    * This requirement is an interaction design requirement
    * This requirement can be tested after RQ-US-2 has been tested
-   * Interaction Steps
+   * Interaction Steps:
        * (Users must be logged in already)
        * (Users should already be in the gift gallery)
        * User sees locked grey image with requirement on it
