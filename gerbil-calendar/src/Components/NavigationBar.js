@@ -29,19 +29,22 @@ export class NavigationBar extends Component {
                     <NavbarBrand tag={Link} to="/" className="kurb-bd">
                         Gerbil Calendar
                     </NavbarBrand>
-                    <NavbarToggler onClick={this.toggle} />
-                    <Collapse isOpen={this.state.isOpen} navbar>
+                    <NavbarToggler/>
+                    <Collapse navbar>
                         <Nav className="mr-auto mt-2 mt-lg-0 kurb-med" navbar>
                             <NavItem>
                                 <NavLink tag={Link} to="/" activeClassName="active" exact>Who is Gerbil?</NavLink>
                             </NavItem>
                             <NavItem>
-                                <NavLink tag={Link} to="/browse" activeClassName="active">Tell Gerbil your upcoming plan</NavLink>
+                                <NavLink tag={Link} to="/calendar" activeClassName="active">Tell Gerbil your upcoming plan</NavLink>
+                            </NavItem>
+                            <NavItem>
+                                <NavLink tag={Link} to="/giftGallery" activeClassName="active">Gift Gallery</NavLink>
                             </NavItem>
                         </Nav>
                         <Nav className="right mt-2 mt-lg-0 kurb-med" navbar>
                             <NavItem>
-                                <NavLink tag={Link} to="/aboutUs" activeClassName="active">Sign In</NavLink>
+                                <NavLink tag={Link} to="/signIn" activeClassName="active">Sign In</NavLink>
                             </NavItem>
                         </Nav>
                     </Collapse>

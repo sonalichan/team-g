@@ -7,9 +7,10 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 
 // Local Components
 import { NavigationBar } from './Components/NavigationBar.js';
-// import { CalendarPage } from './Components/CalendarPage.js';
-// import { GiftGalleryPage } from './Components/GiftGalleryPage.js';
 import { HomePage } from './Components/HomePage.js';
+import { CalendarPage } from './Components/CalendarPage.js';
+import { GiftGalleryPage } from './Components/GiftGalleryPage.js';
+
 
 class App extends Component {
   constructor(props) {
@@ -46,7 +47,10 @@ class App extends Component {
         </header>
         <main>
           <Switch>
-            <Route exact path='/' render={() => (<HomePage />)} />         
+            <Route exact path='/' render={() => (<HomePage />)} />      
+            <Route exact path='/calendar' render={() => (<CalendarPage />)} />         
+            <Route exact path='/giftGallery' render={() => (<GiftGalleryPage />)} />         
+   
             <Redirect to="/" />
           </Switch>
         </main>
