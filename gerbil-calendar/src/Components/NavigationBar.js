@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import {
-    Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink
-} from 'reactstrap';
+import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
 import { NavLink as Link } from 'react-router-dom';
 
 // Navigation Bar Class

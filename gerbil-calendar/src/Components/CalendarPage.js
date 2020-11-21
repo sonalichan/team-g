@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import FullCalendar from "@fullcalendar/react";
+import dayGridPlugin from "@fullcalendar/daygrid";
 
 export class CalendarPage extends Component {
     componentDidMount() {
@@ -18,15 +20,20 @@ export class CalendarPage extends Component {
     
   
     render() {
+      var events = [
+        { title: "today's event", date: new Date() }
+      ];
+
       /* */
       return (
-        <div id="homePage">
-          <div className="gerbil-message">
-          </div>
-          <div className="gerbil-img">
-              <img src="/img/gerbil-image.png" alt="a gerbil's picture"/>
-          </div>
+        <div id="calendarPage">
+          <FullCalendar
+            defaultView="dayGridMonth"
+            plugins={[dayGridPlugin]}
+            events={events}
+          />
         </div>
       );
     }
-  }
+}
+
