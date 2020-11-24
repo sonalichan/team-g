@@ -96,42 +96,64 @@ class tempSignUp extends Component {
     };
 
     submit(e) {
-       // e.preventDefault();
+        e.preventDefault();
         this.props.createUserWithEmailAndPassword(this.nameEl.current.value, this.passwordEl.current.value);    
     };
 
+    /*<form action="action_page.php" method="post">
+  <div class="imgcontainer">
+    <img src="img_avatar2.png" alt="Avatar" class="avatar">
+  </div>
+
+  <div class="container">
+    <label for="uname"><b>Username</b></label>
+    <input type="text" placeholder="Enter Username" name="uname" required>
+
+    <label for="psw"><b>Password</b></label>
+    <input type="password" placeholder="Enter Password" name="psw" required>
+
+    <button type="submit">Login</button>
+    <label>
+      <input type="checkbox" checked="checked" name="remember"> Remember me
+    </label>
+  </div>
+
+  <div class="container" style="background-color:#f1f1f1">
+    <button type="button" class="cancelbtn">Cancel</button>
+    <span class="psw">Forgot <a href="#">password?</a></span>
+  </div>
+</form>
+*/
     render() {
       {this.props.updateUser(this.props.user)}
         return (
         <div>
             <React.Fragment>
             {
-                this.props.loading && "Loading.."
-            }
-            {
                 this.props.user
-                ? <h1>Hello, {this.props.user.displayName} {JSON.stringify(this.props.user.phoneNumber)}</h1>
-                : <h1>Log in</h1>
-            }
-            {
-                this.props.user
-                ? <button onClick={this.props.signOut}>Sign out</button>
-                : <button onClick={this.props.signInWithGoogle}>Sign in with Google</button>
-            }
-            
+                ? <h1>Hello, {this.props.user.displayName}</h1>
+                : <h1>Sign in</h1>
+            }     
             {
                 this.props.loading && <h2>Loading..</h2>
             }
             </React.Fragment>
             <form onSubmit={this.submit}>
-            <input type="text" placeholder="username" ref={this.props.nameEl} />
-            <input type="password" placeholder="password" ref={this.props.passwordEl} />
+            <input type="text" placeholder="username" ref={this.nameEl} />
+            <input type="password" placeholder="password" ref={this.passwordEl} />
             <label>
             <input type="checkbox" ref={this.rememberMeEl} />
             Remember me
             </label>
             <button type="submit" className="myButton">Login</button>
             </form>
+            <React.Fragment>
+            {
+                this.props.user
+                ? <button onClick={this.props.signOut}>Sign out</button>
+                : <button onClick={this.props.signInWithGoogle}>Sign in with Google</button>
+            }  
+            </React.Fragment>
         </div>
         );
     };
