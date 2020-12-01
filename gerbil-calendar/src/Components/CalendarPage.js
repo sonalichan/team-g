@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Button } from 'reactstrap';
 import ReactDOM from 'react-dom';
 import popupModal from "../popupModal";
-import CreateEvent from "../EventForm.js";
+import { CreateEvent , CreateTask } from "../EventForm.js";
 
 import FullCalendar from "@fullcalendar/react";
 import timeGridPlugin from '@fullcalendar/timegrid';
@@ -70,6 +70,9 @@ export class CalendarPage extends Component {
           </div>
           <div classname="eventForm">
             <CreateEvent />
+          </div>
+          <div classname="taskForm">
+            <CreateTask />
           </div>
         </div>
       );
