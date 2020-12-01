@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { Button } from 'reactstrap';
 import ReactDOM from 'react-dom';
-import popupModal from "../popupModal";
-import { CreateEvent , CreateTask } from "../EventForm.js";
+import { CreateEvent, CreateTask } from "../EventForm.js";
 
 import FullCalendar from "@fullcalendar/react";
 import timeGridPlugin from '@fullcalendar/timegrid';
@@ -17,30 +16,25 @@ https://www.newline.co/@dmitryrogozhny/how-to-add-month,-week,-or-day-calendar-i
 API:
 https://fullcalendar.io/docs
 
-use reactstrap form:
-https://reactstrap.github.io/components/form/
+use reactstrap modals:
+https://reactstrap.github.io/components/modals/
 
 
 */
 
 export class CalendarPage extends Component {
-  
+
   componentDidMount() {
-      window.scrollTo(0, 0);
-    }
+    window.scrollTo(0, 0);
+  }
 
-    constructor(props) {
-      super(props);
+  constructor(props) {
+    super(props);
 
-      this.state = {
-        name: "",
-      }
+    this.state = {
+      name: "",
     }
-  
-    sayHello() {
-      alert('Test!');
-    }
-
+  }
 
     render() {
       var events = [
@@ -48,36 +42,29 @@ export class CalendarPage extends Component {
       ];
 
       return (
-
         <div id="calendarPage">
-          <div id = "buttons" align="right">
-          <Button color="primary">+ Add a Schedule</Button>
-          <Button color="secondary">&#x1f5b6;</Button>
+          <div id="buttons" align="right">
+            <CreateEvent />
+            <Button color="secondary">&#x1f5b6;</Button>
           </div>
           <FullCalendar
             defaultView="dayGridMonth"
             plugins={[timeGridPlugin]}
             events={events}
           />
-          <div className="gerbilNote"> 
+          <div className="gerbilNote">
             <div className="button">
               Coming Up Next Week
-              <Button color="secondary">+ Add a Note</Button>
+              <CreateTask />
             </div>
             <div className="gerbil-img">
-              <img src="/img/gerbil-image.png" alt="a gerbil's picture"/>
+              <img src="/img/gerbil-image.png" alt="a gerbil's picture" />
             </div>
-          </div>
-          <div classname="eventForm">
-            <CreateEvent />
-          </div>
-          <div classname="taskForm">
-            <CreateTask />
           </div>
         </div>
       );
     }
-}
+  }
 
-const rootElement = document.getElementById("root");
-ReactDOM.render(<CalendarPage />, rootElement);
+  const rootElement = document.getElementById("root");
+  ReactDOM.render(<CalendarPage />, rootElement);
