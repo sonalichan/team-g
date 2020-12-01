@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { Button } from 'reactstrap';
-import ReactDOM from 'react-dom';
-import popupModal from "../popupModal";
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import { Col, Row, Card, CardImg, Form, FormGroup, FormText, Label, Input } from 'reactstrap';
 
+import ReactDOM from 'react-dom';
 import FullCalendar from "@fullcalendar/react";
 import timeGridPlugin from '@fullcalendar/timegrid';
 
+import popupModal from "../popupModal";
 import '../calendarStyle.css';
 import 'bootstrap/dist/css/bootstrap.css';
 
@@ -23,18 +24,6 @@ https://reactstrap.github.io/components/form/
 */
 
 // replace with bringing up popup window later
-function myFunction() {
-
-  function sayHello() {
-    alert('Test!');
-  }
-  
-  return (
-    <button onClick={sayHello}>
-      Click me!
-    </button>
-  );
-}
 
 export class CalendarPage extends Component {
   
@@ -45,80 +34,50 @@ export class CalendarPage extends Component {
     constructor(props) {
       super(props);
 
-      this.sayHello = this.sayHello.bind(this);
-
       this.state = {
-        name: "",
+        modal: false
       }
 
-      handleChange(e) {
-        const target = e.target;
-        const name = target.name;
-        const value = target.value;
-    
-        this.setState({
-          [name]: value
-        });
-      }
-    
-      handleSubmit(e) {
-        this.setState({ name: this.state.modalInputName });
-        this.modalClose();
-      }
-    
-      modalOpen() {
-        this.setState({ modal: true });
-      }
-    
-      modalClose() {
-        this.setState({
-          modalInputName: "",
-          modal: false
-        });
-    }
-  
-    sayHello() {
-      alert('Test!');
+      this.closeModal = this.closeModal.bind(this);
+    }    
+
+    closeModal = () => {
+      this.setState({
+        modal: false
+      });
     }
 
+    addEvent = () => {
+      this.setState({
+        modal: true
+      });
+    }
 
     render() {
       var events = [
         { title: "today's event", date: new Date() }
       ];
 
+      let renderModal;
+      if (this.state.modal) {
+          renderModal = <RenderEventModal modal={this.state.modal} closeModal={this.closeModal}/>;
+      } else {
+          renderModal = "";
+      }
+
       return (
         /* */
         <div id="calendarPage">
           <div className="App">
-          <h1>Hello!! {this.state.name}</h1>
-            <a href="javascript:;" onClick={e => this.modalOpen(e)}>
-              Open Modal
-            </a>
-          <popupModal show={this.state.modal} handleClose={e => this.modalClose(e)}>
-            <h2>Hello Modal</h2>
-            <div className="form-group">
-              <label>Enter Name:</label>
-              <input
-                type="text"
-                value={this.state.modalInputName}
-                name="modalInputName"
-                onChange={e => this.handleChange(e)}
-                className="form-control"
-              />
-            </div>
-            <div className="form-group">
-              <button onClick={e => this.handleSubmit(e)} type="button">
-                Save
-              </button>
-            </div>
-          </popupModal>
+          <h1>Hello!! </h1>
+          {/* <h1>Hello!! {this.props.user.displayName}</h1> */}
         </div>
 
           <div id = "buttons" align="right">
-          <Button onClick={this.sayHello} color="primary">+ Add a Schedule</Button>
-          <Button onClick={this.sayHello} color="secondary">&#x1f5b6;</Button>
+          <Button onClick={this.addEvent} color="primary">+ Add a Schedule</Button>
+          <Button onClick={this.sayHello} color="secondary">&#x1f5b6; Print?</Button>
           </div>
+          {renderModal}
           <FullCalendar
             defaultView="dayGridMonth"
             plugins={[timeGridPlugin]}
@@ -129,13 +88,35 @@ export class CalendarPage extends Component {
               Coming Up Next Week
               <Button onClick={this.sayHello} color="secondary">+ Add a Note</Button>
             </div>
-            <div className="gerbil-img">
-              <img src="/img/gerbil-image.png" alt="a gerbil's picture"/>
-            </div>
           </div>
         </div>
       );
     }
+}
+
+
+
+class RenderEventModal extends Component {
+  constructor(props) {
+      super(props);
+      this.state = {
+          newEvent: {}
+      };
+  }
+
+  render() {
+    return (
+      <div>
+        <Modal isOpen={this.props.modal} toggle={this.props.closeModal}>
+            <ModalHeader toggle={this.props.closeModal} className="gerbil-text-1">Add Event Modal</ModalHeader>
+            <ModalBody>
+                
+            </ModalBody>
+          </Modal>
+      </div>
+    );
+  }
+
 }
 
 const rootElement = document.getElementById("root");

@@ -48,7 +48,7 @@ class App extends Component {
         <main>
           <Switch>
             <Route exact path='/' render={() => (<HomePage />)} />      
-            <Route exact path='/calendar' render={() => (<CalendarPage />)} />         
+            <Route exact path='/calendar' render={() => (<CalendarPage ifLogIn={this.state.ifLogIn}/>)} />         
             <Route exact path='/giftGallery' render={() => (<GiftGalleryPage />)} />         
    
             <Redirect to="/" />
