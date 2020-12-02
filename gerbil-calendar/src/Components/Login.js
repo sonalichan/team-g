@@ -2,6 +2,7 @@ import React, { Component, useRef, useState } from 'react';
 import { Form, Button, Card, Alert } from 'react-bootstrap';
 import { useAuth } from '../contexts/AuthContext'
 import { Link, useHistory } from 'react-router-dom'
+import { signInWithGoogle } from './firebase';
 
   export default function Login() {
     const emailRef = useRef();
@@ -47,6 +48,9 @@ import { Link, useHistory } from 'react-router-dom'
             </div>    
           </Card.Body>
         </Card>
+        <div className="w-100 text-center mt-2">
+            <button className="login-provider-button" onClick={signInWithGoogle}>Sign in with Google</button>
+        </div>
         <div className="w-100 text-center mt-2">
           Need an account? <Link to="/signup">Sign Up</Link>
         </div>
