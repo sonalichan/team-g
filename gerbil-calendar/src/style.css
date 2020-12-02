@@ -77,6 +77,36 @@ html, body, #root {
 }
 
 
+/*** Calendar-Page ***/
+#calendarPage h1, #calendarPage h2 {
+    text-align: left;
+    font-family: Mali;
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 39px;
+    
+    margin-left: 2vw;
+    margin-top: 2vh;
+    display: inline-block;
+
+}
+
+#calendarPage .calendar-button {
+    display: inline-block;
+    position: fixed;
+    right: 2vw;
+    top: 2vh;
+}
+
+.fc-toolbar-title {
+    font-family: Mali;
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 39px;
+}
+
+
+
 
 /*** gift-gallery-Page ***/
 

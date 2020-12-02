@@ -68,21 +68,20 @@ export class CalendarPage extends Component {
       return (
         /* */
         <div id="calendarPage">
-          <div className="App">
-          <h1>Hello!! </h1>
-          {/* <h1>Hello!! {this.props.user.displayName}</h1> */}
-        </div>
-
-          <div id = "buttons" align="right">
-          <Button onClick={this.addEvent} color="primary">+ Add a Schedule</Button>
-          <Button onClick={this.sayHello} color="secondary">&#x1f5b6; Print?</Button>
-          </div>
+            <h1>Hello!! </h1>
+            {/* <h1>Hello!! {this.props.user.displayName}</h1> */}
+            <div className="calendar-button">
+              <Button onClick={this.addEvent} color="primary">+ Add a Schedule</Button>
+              <Button onClick={this.sayHello} color="secondary">&#x1f5b6; Print?</Button>
+            </div>
           {renderModal}
+          
           <FullCalendar
             defaultView="dayGridMonth"
             plugins={[timeGridPlugin]}
             events={events}
           />
+          
           <div className="gerbilNote"> 
             <div className="button">
               Coming Up Next Week
