@@ -46,8 +46,8 @@ export class NavigationBar extends Component {
                             <NavItem>
                             {
                                 this.props.user
-                                ? <NavLink tag={Link} to="/signUp" activeClassName="active">{this.props.user.displayName}</NavLink>
-                                : <NavLink tag={Link} to="/signUp" activeClassName="active">Sign In</NavLink>
+                                ? <NavLink tag={Link} to="/signup" activeClassName="active">Settings</NavLink>
+                                : <NavLink tag={Link} to="/signup" activeClassName="active">Sign In</NavLink>
                             }
                                 
                             </NavItem>
