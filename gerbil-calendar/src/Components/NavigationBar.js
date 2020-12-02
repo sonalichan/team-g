@@ -42,7 +42,12 @@ export class NavigationBar extends Component {
                         </Nav>
                         <Nav className="right mt-2 mt-lg-0 kurb-med" navbar>
                             <NavItem>
-                                <NavLink tag={Link} to="/signIn" activeClassName="active">Sign In</NavLink>
+                            {
+                                this.props.user
+                                ? <NavLink tag={Link} to="/signup" activeClassName="active">Settings</NavLink>
+                                : <NavLink tag={Link} to="/signup" activeClassName="active">Sign In</NavLink>
+                            }
+                                
                             </NavItem>
                         </Nav>
                     </Collapse>
