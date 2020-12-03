@@ -4,23 +4,15 @@ import './style.css';
 import React, { Component } from 'react';
 import './index.css'; // css file
 import { Route, Switch, Redirect, Router } from 'react-router-dom';
-import { AuthProvider } from "./contexts/AuthContext";
-import { Container } from "react-bootstrap";
 
 import firebase from 'firebase/app';
+import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 
 // Local Components
 import { NavigationBar } from './Components/NavigationBar.js';
 import { HomePage } from './Components/HomePage.js';
 import { CalendarPage } from './Components/CalendarPage.js';
 import { GiftGalleryPage } from './Components/GiftGalleryPage.js';
-import Signup from './Components/SignUp.js';
-import Login from './Components/Login';
-import Dashboard from './Components/Dashboard';
-import PrivateRoute from './Components/PrivateRoute';
-import ForgotPassword from './Components/ForgotPassword';
-import UpdateProfile from './Components/UpdateProfile'
-
 
 class App extends Component {
   constructor(props) {
@@ -138,23 +130,33 @@ class App extends Component {
         }
       },
 
-      user: null, // firebase user
+      user: null // firebase user
     };
   };
 
-  updateUser = (user) => {
-    this.setState({ 
-      user: user,
-      ifLogIn: true
-    });
-  };
+
+  // signInWithGoogle = () => {
+  //   this.props.firebaseAppAuth.signInWithPopup(this.props.googleProvider).then((res) => {
+  //     console.log(res.user);
+  //     this.setState({ 
+  //       user: res.user,
+  //       ifLogIn: true
+  //     });
+  //   }).catch((error) => {
+  //     console.log(error.message)
+  //   })
+  // }
+
+  signInWithGoogle = () => {
+    this.setState({ ifLogIn: true });
+  }
 
   componentDidMount() {
     firebase.auth().signOut() // a default setting: if the user refreshes the page, they will need to be re-logged-in
 
     this.authUnRegFunc = firebase.auth().onAuthStateChanged((firebaseUser) => {
       // if a user signs in
-
+      console.log(firebaseUser);
       if (firebaseUser !== null) {
         this.setState({ user: firebaseUser })
         // if a member signs in
@@ -303,10 +305,9 @@ class App extends Component {
               }
             }
           })
-          // if an organziation signs in
-        } else {
-          this.setState({ user: null, ifLogIn: false })
-        }
+        } 
+      } else {
+        this.setState({ user: null, ifLogIn: false })
       }
     })
   }
@@ -330,61 +331,33 @@ class App extends Component {
     signInFlow: 'popup',
   }
 
+
   render() {
-    console.log(this.state.user);
-    console.log(this.state.ifLogIn);
-    if (this.state.user) {
-      console.log(this.state.user.uid);
+    let content = null;
+
+    if (this.state.user == null && this.state.ifLogIn) {
+      content = <StyledFirebaseAuth uiConfig={this.uiConfig} firebaseAuth={firebase.auth()} />
+    } else {
+      content = (
+        <div>
+          <header>
+            <NavigationBar
+              ifLogIn={this.state.ifLogIn}
+              user={this.state.user}
+              signInWithGoogle={this.signInWithGoogle}
+              handleSignOut={this.handleSignOut} />
+          </header>
+          <main>
+              <Switch>
+                <Route exact path='/' render={() => (<HomePage />)} />      
+                <Route exact path='/calendar' render={() => (<CalendarPage ifLogIn={this.state.ifLogIn}/>)} />         
+                <Route exact path='/giftGallery' render={() => (<GiftGalleryPage ifLogIn={this.state.ifLogIn}/>)} />            
+                <Redirect to="/" />
+              </Switch>
+          </main>
+        </div >
+      );
     }
-
-
-    let content = (
-      <div>
-        <header>
-          <NavigationBar
-            ifLogIn={this.state.ifLogIn}
-            user={this.state.user} />
-        </header>
-        <main>
-          <AuthProvider>
-            <Switch>
-              <Route exact path='/' render={() => (<HomePage />)} />      
-              <Route exact path='/calendar' render={() => (<CalendarPage ifLogIn={this.state.ifLogIn}/>)} />         
-              <Route exact path='/giftGallery' render={() => (<GiftGalleryPage />)} />            
-              <Container 
-                className="d-flex align-items-center justify-content-center"
-                style={{ minHeight: "100vn" }}>
-                <div className="w-100" style={{ maxWidth: "400px" }}>         
-                  <Route exact path='/signup' render={() => (<Signup />)} />
-                  <Route exact path='/login' render={() => (<Login />)} />
-                  <PrivateRoute exact path='/' component={Dashboard} />
-                  <PrivateRoute path='/update-profile' component={UpdateProfile} />
-                  <Route exact path='/forgot-password' render={() => (<ForgotPassword />)} />
-                </div>
-              </Container>
-              <Redirect to="/" />
-            </Switch>
-          </AuthProvider>
-        </main>
-      </div >
-    );
-
-    // <Container 
-      //   className="d-flex align-items-center justify-content-center"
-      //   style={{ minHeight: "100vn" }}
-      //   >
-      //     <div className="w-100" style={{ maxWidth: "400px" }}>
-      //       <Router>
-      //         <AuthProvider>
-      //           <Switch>
-      //             <Route path="/signup" component={Signup} />
-      //           </Switch>
-      //         </AuthProvider>
-      //       </Router>
-      //       <Signup />
-      //     </div>
-      // </Container>
-    
 
     return (
       <div>

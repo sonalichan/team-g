@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
+import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import { NavLink as Link } from 'react-router-dom';
 
 // Navigation Bar Class
@@ -20,6 +20,7 @@ export class NavigationBar extends Component {
     }
 
     render() {
+
         return (
             // navigation bar
             <div>
@@ -36,23 +37,37 @@ export class NavigationBar extends Component {
                             <NavItem>
                                 <NavLink tag={Link} to="/calendar" activeClassName="active">Tell Gerbil your upcoming plan</NavLink>
                             </NavItem>
-                            <NavItem>
-                                <NavLink tag={Link} to="/giftGallery" activeClassName="active">Gift Gallery</NavLink>
-                            </NavItem>
                         </Nav>
-                        <Nav className="right mt-2 mt-lg-0 kurb-med" navbar>
-                            <NavItem>
-                            {
-                                this.props.user
-                                ? <NavLink tag={Link} to="/signup" activeClassName="active">Settings</NavLink>
-                                : <NavLink tag={Link} to="/signup" activeClassName="active">Sign In</NavLink>
-                            }
-                                
-                            </NavItem>
-                        </Nav>
+                        <DropDown ifLogIn={this.props.ifLogIn} user={this.props.user} signInWithGoogle={this.props.signInWithGoogle} handleSignOut={this.props.handleSignOut} />
                     </Collapse>
                 </Navbar>
             </div>
         );
+    }
+}
+
+
+export class DropDown extends Component {
+    render() {
+
+        if (this.props.ifLogIn) {
+            return (
+                <Nav className="right mt-2 mt-lg-0 kurb-med" navbar>
+                    <UncontrolledDropdown nav inNavbar>
+                        <DropdownToggle nav caret>{this.props.user.displayName}</DropdownToggle>
+                        <DropdownMenu right>
+                            <DropdownItem tag={Link} key="1" to="/giftGallery" activeStyle={{ textDecoration: 'none', color: 'black' }} >Gift Gallery</DropdownItem>
+                            <DropdownItem tag={Link} key="2" to="/" onClick={this.props.handleSignOut} >Log out</DropdownItem>
+                        </DropdownMenu>
+                    </UncontrolledDropdown>
+                </Nav>
+            );
+        } else {
+            return (
+                <Nav className="right mt-2 mt-lg-0 kurb-med" navbar>
+                    <NavItem tag={Link} key="1" to="/" onClick={this.props.signInWithGoogle}>Sign In</NavItem>
+                </Nav>
+            );
+        }
     }
 }
