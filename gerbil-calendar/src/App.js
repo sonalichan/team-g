@@ -348,7 +348,7 @@ class App extends Component {
         <main>
         <AuthProvider>
           <Switch>
-            <Route exact path='/calendar' render={() => (<CalendarPage />)} />         
+            <Route exact path='/calendar' render={() => (<CalendarPage ifLogIn={this.state.ifLogIn}/> )} />         
             <Route exact path='/giftGallery' render={() => (<GiftGalleryPage />)} />
             <Container 
               className="d-flex align-items-center justify-content-center"
@@ -361,7 +361,6 @@ class App extends Component {
               <Route exact path='/forgot-password' render={() => (<ForgotPassword />)} />
               </div>
           </Container>
-          <Redirect to="/" />
           </Switch>
           </AuthProvider>
         </main>
