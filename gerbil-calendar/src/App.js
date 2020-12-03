@@ -346,22 +346,24 @@ class App extends Component {
             user={this.state.user} />
         </header>
         <main>
-        <AuthProvider>
-          <Switch>
-            <Route exact path='/calendar' render={() => (<CalendarPage ifLogIn={this.state.ifLogIn}/> )} />         
-            <Route exact path='/giftGallery' render={() => (<GiftGalleryPage />)} />
-            <Container 
-              className="d-flex align-items-center justify-content-center"
-              style={{ minHeight: "100vn" }}>
-              <div className="w-100" style={{ maxWidth: "400px" }}>         
-              <Route exact path='/signup' render={() => (<Signup />)} />
-              <Route exact path='/login' render={() => (<Login />)} />
-              <PrivateRoute exact path='/' component={Dashboard} />
-              <PrivateRoute path='/update-profile' component={UpdateProfile} />
-              <Route exact path='/forgot-password' render={() => (<ForgotPassword />)} />
-              </div>
-          </Container>
-          </Switch>
+          <AuthProvider>
+            <Switch>
+              <Route exact path='/' render={() => (<HomePage />)} />      
+              <Route exact path='/calendar' render={() => (<CalendarPage ifLogIn={this.state.ifLogIn}/>)} />         
+              <Route exact path='/giftGallery' render={() => (<GiftGalleryPage />)} />            
+              <Container 
+                className="d-flex align-items-center justify-content-center"
+                style={{ minHeight: "100vn" }}>
+                <div className="w-100" style={{ maxWidth: "400px" }}>         
+                  <Route exact path='/signup' render={() => (<Signup />)} />
+                  <Route exact path='/login' render={() => (<Login />)} />
+                  <PrivateRoute exact path='/' component={Dashboard} />
+                  <PrivateRoute path='/update-profile' component={UpdateProfile} />
+                  <Route exact path='/forgot-password' render={() => (<ForgotPassword />)} />
+                </div>
+              </Container>
+              <Redirect to="/" />
+            </Switch>
           </AuthProvider>
         </main>
       </div >
