@@ -20,6 +20,8 @@ html, body, #root {
 
 
 
+
+
 /** Reactstrap css **/
 .modal-dialog {
     position: absolute !important;
@@ -183,4 +185,18 @@ html, body, #root {
     width: 100%;
     text-align: center;
     margin: 20px 0vw;
+}
+
+
+/** Warning **/
+.warning {
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    height: 80vh;
+    padding: 0 25vw;
+}
+
+.warning .warning-message {
+    line-height: 60px;
 }

@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import { Jumbotron, Container } from 'reactstrap';
-import { NavLink as Link } from 'react-router-dom';
 import { Modal, ModalHeader, ModalBody, Button } from 'reactstrap';
 
 
@@ -120,8 +118,8 @@ export class GiftGalleryPage extends Component {
 
     
     addEvent = () => {
-        let gifts = this.state.user.giftGallery;
-        let numOfEvents = this.state.user.event + 1;
+        let gifts = this.props.userData.giftGallery.giftGallery; 
+        let numOfEvents = this.props.userData.giftGallery.event + 1;
         let ifGiftObtained = false;
         let giftObtained = {};
         gifts = gifts.map((gift) => {
@@ -131,7 +129,7 @@ export class GiftGalleryPage extends Component {
             }
 
             // if gift's requirement is not event-related, do nothing
-            if (gift.req != "event") {
+            if (gift.req !== "event") {
                 return gift;
             }
 
@@ -159,8 +157,8 @@ export class GiftGalleryPage extends Component {
 
     logIn = () => {
 
-        let gifts = this.state.user.giftGallery;
-        let numOfLogIn = this.state.user.logIn + 1;
+        let gifts = this.props.userData.giftGallery.giftGallery;
+        let numOfLogIn = this.props.userData.giftGallery.logIn + 1;
         let ifGiftObtained = false;
         let giftObtained = {};
 
@@ -172,7 +170,7 @@ export class GiftGalleryPage extends Component {
             }
 
             // if gift's requirement is not event-related, do nothing
-            if (gift.req != "log-in") {
+            if (gift.req !== "log-in") {
                 return gift;
             }
 
@@ -210,9 +208,17 @@ export class GiftGalleryPage extends Component {
 
 
     render() {
+        if (!this.props.ifLogIn) {
+            return (
+                <div className="warning">
+                    <div className="warning-message gerbil-text-1">You haven't log-in yet! Click "Sign In" on the top right to let Gerbil know who you are!</div>
+                </div>
+            );
+        }
+
         let gerbilGifts;
 
-        gerbilGifts = this.state.user.giftGallery.map((gift) => {
+        gerbilGifts = this.props.userData.giftGallery.giftGallery.map((gift) => {
             return <GiftCard key={gift.id} data={gift} />;
         })
 
@@ -247,7 +253,7 @@ class GiftCard extends Component {
         if (gift.earned) {
             return (
                 <div className="gerbil-gift met">
-                    <img src={gift.url} />
+                    <img alt="gerbil's gift" src={gift.url} />
                 </div>
             );
         } else {
@@ -262,10 +268,6 @@ class GiftCard extends Component {
 
 
 class RenderModal extends Component {
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         let giftObtained = this.props.gift;
         return (
@@ -274,7 +276,7 @@ class RenderModal extends Component {
                 <ModalBody>
                     <p className="gerbil-gift-message gerbil-text-1">Thanks for telling me all of your story! Here is a secret gift!!! Hope you like it!</p>
                     <div className="gerbil-gift">
-                        <img src={giftObtained.url} />
+                        <img alt="gerbil's gift" src={giftObtained.url} />
                     </div>
                     <div className="gerbil-gift-name gerbil-text-1">{giftObtained.giftName}</div>
                 </ModalBody>
