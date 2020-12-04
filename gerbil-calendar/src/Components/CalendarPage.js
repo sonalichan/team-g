@@ -25,6 +25,19 @@ https://reactstrap.github.io/components/form/
 
 // replace with bringing up popup window later
 
+class PrintThisComponent extends Component {
+  render() {
+    return (
+      <div>
+        <button onClick={() => window.print()}>PRINT</button>
+        <p>Click above button opens print preview with these words on page</p>
+      </div>
+    )
+  }
+}
+
+export default PrintThisComponent
+
 export class CalendarPage extends Component {
   
   componentDidMount() {
@@ -72,7 +85,7 @@ export class CalendarPage extends Component {
             {/* <h1>Hello!! {this.props.user.displayName}</h1> */}
             <div className="calendar-button">
               <Button onClick={this.addEvent} color="primary">+ Add a Schedule</Button>
-              <Button onClick={this.sayHello} color="secondary">&#x1f5b6; Print?</Button>
+              <Button onClick={() => window.print()} color="secondary">&#x1f5b6; Print</Button>
             </div>
           {renderModal}
           
