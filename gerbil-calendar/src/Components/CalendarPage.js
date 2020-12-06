@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Button } from 'reactstrap';
 import ReactDOM from 'react-dom';
-import { CreateEvent, CreateTask } from "../EventForm2.js";
+import { CreateEvent, CreateTask, ShowTask } from "../EventForm2.js";
 
 import FullCalendar from "@fullcalendar/react";
 import timeGridPlugin from '@fullcalendar/timegrid';
@@ -18,6 +18,9 @@ https://fullcalendar.io/docs
 
 */
 
+/* 
+TO DO: add the "add a note" text section
+*/
 export class CalendarPage extends Component {
 
   componentDidMount() {
@@ -46,12 +49,17 @@ export class CalendarPage extends Component {
           <FullCalendar
             defaultView="dayGridMonth"
             plugins={[timeGridPlugin]}
-            events={events} 
+            events={events}
+            eventClick={
+              function(){
+                <CreateEvent />
+              }
+            } 
           />
           <div className="gerbilNote">
             <div className="button">
-              Coming Up Next Week
               <CreateTask />
+              <ShowTask />
             </div>
             <div className="gerbil-img">
               <img src="/img/gerbil-image.png" alt="a gerbil's picture" />

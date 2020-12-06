@@ -1,6 +1,6 @@
 import React, { useState, Component } from 'react';
 import { Row, Col, Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
-import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import { Modal, ModalHeader, ModalBody, ModalFooter, Toast, ToastHeader, ToastBody } from 'reactstrap';
 
 import firebase from 'firebase/app';
 import { render } from 'react-dom';
@@ -36,13 +36,7 @@ export class CreateEvent extends Component {
         super(props);
         this.state = {
             modal: false,
-            newEvent: {
-                id: '', // 'a',
-                title: '',// 'EVENT TITLE',
-                start: '',  // '2019-08-12T11:30:00',
-                end: '', // '2019-08-12T11:30:00',
-                description: '', // 'Test Description'
-            }
+            newEvent: {}
         };
 
         this.toggle = this.toggle.bind(this);
@@ -111,42 +105,36 @@ export class CreateEvent extends Component {
     }
 
     // append all info from add title, starttime, endtime, description etc.
+    // accept all user input to create information for a single Event
+    // user --> updateing the database using the AddNewEvent funtion --> database is updated!
+
+    /*
+          id: 'a',
+      title: EVENT TITLE,
+      start: '2019-08-12T11:30:00' - HOW DO I CONVERT TIME INTO THIS IF I ONLY HAVE START TIME + END TIME?
+      end: '2019-08-12T11:30:00',
+      description: 'Test Description', 
+    */
     addNewEvent = () => {
         console.log(this.state.newEvent)
-
-        // to close modal: set 
-        // {
-        //     key: {},
-        //     key: {},
-        // }
-
-
-
-        // user --> updateing the database using the AddNewEvent funtion --> database is updated!
-        // 
-        /* () => {
-            let newEventKey = firebase.database().ref().child('posts').push().key;
-            let updates = {};
-            // push a newly created event to firebase
-            updates['/user/"UID"/events' + newEventKey] = this.state.newEvent;
-            firebase.database().ref().update(updates);
-            this.setState({ modal: false, newEvent: {} })
-        }
-    ) */
-    }
-
-    // remove specified event. when finding event with matching id, remove event
-    // event.remove() and calendar.getEventById( id )
-    removeEvent = () => {
-        /* 
-        user clicks on event on calendar to remove
-        modal pops up with all saved event information
-
-        if (user clicks on button to remove specified event){
-            event.remove()
-        } 
-
-        */
+        this.setState({
+            newEvent: {
+                ...this.state.newEvent,
+                title: this.state.newEvent.title,
+                start: this.state.newEvent.start,
+                end: this.state.newEvent.end,
+                description: this.state.newEvent.description
+            }
+        },
+            () => {
+                let newEventKey = firebase.database().ref().child('posts').push().key;
+                let updates = {};
+                // push a newly created event to firebase
+                updates['/allData/events/' + newEventKey] = this.state.newEvent;
+                firebase.database().ref().update(updates);
+                this.setState({ modal: false, newEvent: {} })
+            }
+        )
     }
 
     render() {
@@ -212,7 +200,7 @@ export class CreateEvent extends Component {
                     </ModalBody>
                     <ModalFooter>
                         <Button color="primary" onClick={this.addNewEvent}>Create Event</Button>{' '}
-                        <Button color="secondary" onClick={this.toggle}>Cancel</Button>
+                        <Button color="secondary" onClick={this.cancelEventCreation}>Cancel</Button>
                     </ModalFooter>
                 </Modal>
             </div>
@@ -222,17 +210,13 @@ export class CreateEvent extends Component {
 
 /* WORK ON THIS LATER!!!!!!!!!!!!!! 
 NOT CONNECTED TO FULLCALENDAR- DONT NEED TO WORRY ABOUT CONNECTION
-
-in CreateTask, store:
-Note
-Date (OPTIONAL)
 */
 export class CreateTask extends Component {
     constructor(props) {
         super(props);
         this.state = {
             modal: false,
-            newEvent: {}
+            newTask: {}
         };
 
         this.toggle = this.toggle.bind(this);
@@ -249,23 +233,40 @@ export class CreateTask extends Component {
         this.setState({ modal: false, newEvent: {} });
     }
 
+    addTaskDesc = (evt) => {
+        this.setState({
+            newTask: {
+                ...this.state.newTask,
+                task: evt.target.value
+            }
+        })
+    }
+
+    addTaskDate = (evt) => {
+        this.setState({
+            newTask: {
+                ...this.state.newTask,
+                date: evt.target.value
+            }
+        })
+    }
+
     addNewTask = () => {
         this.setState({
             newTask: {
                 ...this.state.newTask,
 
-                /* location: this.state.newEvent.place + ", " + this.state.newEvent.city + ", " + this.state.newEvent.state,
-                dmyTime: this.state.newEvent.dayOfTheWeek + ", " + this.state.newEvent.abrMonthText + " " + this.state.newEvent.date + ", " + this.state.newEvent.year + " " + this.state.newEvent.time,
-                organizer: this.props.user.uid */
+                task: this.state.newTask.task,
+                date: this.state.newTask.date
             }
         },
             // push new Task to firebase
             () => {
-                let newEventKey = firebase.database().ref().child('posts').push().key;
+                let newTaskKey = firebase.database().ref().child('posts').push().key;
                 let updates = {};
-                updates['/allData/events/' + newEventKey] = this.state.newEvent;
+                updates['/allData/tasks/' + newTaskKey] = this.state.newTask;
                 firebase.database().ref().update(updates);
-                this.setState({ modal: false, newEvent: {} })
+                this.setState({ modal: false, newTask: {} })
             }
         )
     }
@@ -316,3 +317,29 @@ export class CreateTask extends Component {
         );
     }
 }
+
+/* allow person to click on event to view it, and exit viewing or delete.
+DIFFERENT THAN MODAL TO CREATE EVENT */
+
+export class ViewEvent extends Component {
+}
+
+
+/* show a text box with the "note" a person has stored on the bottom of a calendar */
+export class ShowTask extends Component {
+    render() {
+        return (
+            <div>
+            <Toast>
+                <ToastHeader>
+                Coming Up Next Week
+                </ToastHeader>
+                <ToastBody>
+                    This textbox will display the user's Task from the Add a Note button (CreateTask)!
+                    And the date
+                 </ToastBody>
+            </Toast>
+            </div>
+        );
+    }
+} 
