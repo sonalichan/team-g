@@ -27,7 +27,7 @@ class App extends Component {
 
       userData: {
         events: [], // calendar events
-        tasks: [], // tasks
+        tasks: [], // tasks "notes"
         firstDaywithGerbil: "",
         numOfTotalEvents: 0,
         numOfTotalTasks: 0

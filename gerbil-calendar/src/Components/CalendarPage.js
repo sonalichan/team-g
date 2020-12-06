@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Button } from 'reactstrap';
 import ReactDOM from 'react-dom';
-import { CreateEvent, CreateTask } from "../EventForm.js";
+import { CreateEvent, CreateTask } from "../EventForm2.js";
 
 import FullCalendar from "@fullcalendar/react";
 import timeGridPlugin from '@fullcalendar/timegrid';
@@ -13,12 +13,8 @@ import 'bootstrap/dist/css/bootstrap.css';
 TUTORIAL:
 https://www.newline.co/@dmitryrogozhny/how-to-add-month,-week,-or-day-calendar-in-react-with-fullcalendar--7e10e8cf 
 
-API:
+API documentation (add event, remove event, start event time etc):
 https://fullcalendar.io/docs
-
-use reactstrap modals:
-https://reactstrap.github.io/components/modals/
-
 
 */
 
@@ -50,7 +46,7 @@ export class CalendarPage extends Component {
           <FullCalendar
             defaultView="dayGridMonth"
             plugins={[timeGridPlugin]}
-            events={events}
+            events={events} 
           />
           <div className="gerbilNote">
             <div className="button">
