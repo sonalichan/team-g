@@ -6,9 +6,10 @@ import ReactDOM from 'react-dom';
 import FullCalendar from "@fullcalendar/react";
 import timeGridPlugin from '@fullcalendar/timegrid';
 
-import popupModal from "../popupModal";
 import '../calendarStyle.css';
 import 'bootstrap/dist/css/bootstrap.css';
+import AddNote from './AddANote';
+
 
 /*
 TUTORIAL:
@@ -25,19 +26,6 @@ https://reactstrap.github.io/components/form/
 
 // replace with bringing up popup window later
 
-class PrintThisComponent extends Component {
-  render() {
-    return (
-      <div>
-        <button onClick={() => window.print()}>PRINT</button>
-        <p>Click above button opens print preview with these words on page</p>
-      </div>
-    )
-  }
-}
-
-export default PrintThisComponent
-
 export class CalendarPage extends Component {
   
   componentDidMount() {
@@ -48,11 +36,18 @@ export class CalendarPage extends Component {
       super(props);
 
       this.state = {
-        modal: false
+        modal: false,
+        noteInput: null
       }
 
       this.closeModal = this.closeModal.bind(this);
-    }    
+    }  
+    
+    addNote = (text) => {
+      this.setState({
+          noteInput: text
+      })
+    }
 
     closeModal = () => {
       this.setState({
@@ -78,6 +73,8 @@ export class CalendarPage extends Component {
           renderModal = "";
       }
 
+      console.log(this.state.noteInput);
+
       return (
         /* */
         <div id="calendarPage">
@@ -89,6 +86,7 @@ export class CalendarPage extends Component {
             </div>
           {renderModal}
           
+          
           <FullCalendar
             defaultView="dayGridMonth"
             plugins={[timeGridPlugin]}
@@ -98,14 +96,15 @@ export class CalendarPage extends Component {
           <div className="gerbilNote"> 
             <div className="button">
               Coming Up Next Week
-              <Button onClick={this.sayHello} color="secondary">+ Add a Note</Button>
+            </div>
+            <AddNote addNote={this.addNote}/>
+            <div>
+              {this.state.noteInput}
             </div>
           </div>
         </div>
       );
-    }
-}
-
+    }}
 
 
 class RenderEventModal extends Component {
@@ -115,6 +114,7 @@ class RenderEventModal extends Component {
           newEvent: {}
       };
   }
+  
 
   render() {
     return (

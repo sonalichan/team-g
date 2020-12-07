@@ -13,6 +13,7 @@ import { NavigationBar } from './Components/NavigationBar.js';
 import { HomePage } from './Components/HomePage.js';
 import { CalendarPage } from './Components/CalendarPage.js';
 import { GiftGalleryPage } from './Components/GiftGalleryPage.js';
+import AddNote from './Components/AddANote';
 
 class App extends Component {
   constructor(props) {
@@ -351,7 +352,8 @@ class App extends Component {
               <Switch>
                 <Route exact path='/' render={() => (<HomePage />)} />      
                 <Route exact path='/calendar' render={() => (<CalendarPage ifLogIn={this.state.ifLogIn}/>)} />         
-                <Route exact path='/giftGallery' render={() => (<GiftGalleryPage ifLogIn={this.state.ifLogIn}/>)} />            
+                <Route exact path='/giftGallery' render={() => (<GiftGalleryPage ifLogIn={this.state.ifLogIn}/>)} />
+                <Route exact path='/modal' render={() => (<AddNote/>)} />                        
                 <Redirect to="/" />
               </Switch>
           </main>
