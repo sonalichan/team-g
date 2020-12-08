@@ -10,19 +10,6 @@ import { render } from 'react-dom';
 https://fullcalendar.io/docs
 */
 
-
-
-// summarizing a single event
-/* 
-    {
-      id: 'a',
-      title: EVENT TITLE,
-      start: '2019-08-12T11:30:00' ,
-      end: '2019-08-12T11:30:00',
-      description: 'Test Description',
-    }
-
-*/
 export class CreateEvent extends Component {
     constructor(props) {
         super(props);
@@ -34,19 +21,16 @@ export class CreateEvent extends Component {
         this.toggle = this.toggle.bind(this);
     }
 
-    // open and close popup modal  to create event
     toggle() {
         this.setState(prevState => ({
             modal: !prevState.modal,
         }));
     }
 
-    // exit event popup modal without saving
     cancelEventCreation = () => {
         this.setState({ modal: false, newEvent: {} });
     }
 
-    // accept 'title' from form
     addTitle = (evt) => {
         this.setState({
             newEvent: {
@@ -65,8 +49,6 @@ export class CreateEvent extends Component {
         })
     }
 
-    // accept 'start', value for starting time. NOT OPTIONAL
-    // event.setStart( date, [ options ] )
     addStartTime = (evt) => {
         this.setState({
             newEvent: {
@@ -75,8 +57,7 @@ export class CreateEvent extends Component {
             }
         })
     }
-    // accept 'end time' from form. can be null- CAN BE OPTIONAL
-    // event.setEnd( date )
+
     addEndTime = (evt) => {
         this.setState({
             newEvent: {
@@ -86,27 +67,15 @@ export class CreateEvent extends Component {
         })
     }
 
-    // accept description from form
     addDescription = (evt) => {
         this.setState({
             newEvent: {
                 ...this.state.newEvent,
-                description: evt.target.value // there's no method for description like event start / event end
+                description: evt.target.value
             }
         })
     }
 
-    // append all info from add title, starttime, endtime, description etc.
-    // accept all user input to create information for a single Event
-    // user --> updateing the database using the AddNewEvent funtion --> database is updated!
-
-    /*
-          id: 'a',
-      title: EVENT TITLE,
-      start: '2019-08-12T11:30:00' - HOW DO I CONVERT TIME INTO THIS IF I ONLY HAVE START TIME + END TIME?
-      end: '2019-08-12T11:30:00',
-      description: 'Test Description', 
-    */
     addNewEvent = () => {
         this.setState({
             newEvent: {
@@ -125,17 +94,11 @@ export class CreateEvent extends Component {
 
                 let newEventKey = firebase.database().ref('users/' + this.props.user.uid).child('events').push().key;
                 let updates = {};
-                // push a newly created event to firebase
-                updates['/users/' + this.props.user.uid + '/events/' +  newEventKey] = this.state.newEvent;
+
+                // push newly created event to firebase
+                updates['/users/' + this.props.user.uid + '/events/' + newEventKey] = this.state.newEvent;
                 firebase.database().ref().update(updates);
                 this.setState({ modal: false, newEvent: {} })
-                /* 
-                let newEventKey = firebase.database().ref().child('posts').push().key;
-                let updates = {};
-                // push a newly created event to firebase
-                updates['/allData/events/' + newEventKey] = this.state.newEvent;
-                firebase.database().ref().update(updates);
-                this.setState({ modal: false, newEvent: {} }) */
             }
         )
     }
@@ -222,7 +185,6 @@ export class CreateTask extends Component {
         this.toggle = this.toggle.bind(this);
     }
 
-    // toggle modal open & close
     toggle() {
         this.setState(prevState => ({
             modal: !prevState.modal,
@@ -260,9 +222,20 @@ export class CreateTask extends Component {
                 date: this.state.newTask.date
             }
         },
+            () => {
+                console.log(this.state.newTask);
+                console.log(firebase.database().ref('users/' + this.props.user.uid)); // HELP: TypeError: Cannot read property 'uid' of undefined
+
+                let newTaskKey = firebase.database().ref('users/' + this.props.user.uid).child('tasks').push().key;
+                let updates = {};
+
+                // push newly created Task  to firebase
+                updates['/users/' + this.props.user.uid + '/tasks/' + newTaskKey] = this.state.newTask;
+                firebase.database().ref().update(updates);
+                this.setState({ modal: false, newTask: {} })
+            }
         )
     }
-
 
     render() {
         return (
@@ -279,6 +252,7 @@ export class CreateTask extends Component {
                                     type="textarea"
                                     name="text"
                                     id="exampleText"
+                                    onChange={this.addTaskDesc}
                                 />
                             </FormGroup>
                             <FormGroup>
@@ -288,6 +262,7 @@ export class CreateTask extends Component {
                                     name="date"
                                     id="exampleDate"
                                     placeholder="date placeholder"
+                                    onChange={this.addTaskDate}
                                 />
                             </FormGroup>
                         </Form >
@@ -295,12 +270,12 @@ export class CreateTask extends Component {
                     <ModalFooter>
                         <Button
                             color="primary"
-                            onClick={this.toggle}>
+                            onClick={this.addNewTask}>
                             Add Task
                         </Button>
                         <Button
                             color="secondary"
-                            onClick={this.toggle}>
+                            onClick={this.cancelCreateTask}>
                             Cancel
                         </Button>
                     </ModalFooter>
@@ -316,8 +291,6 @@ DIFFERENT THAN MODAL TO CREATE EVENT */
 export class ViewEvent extends Component {
 }
 
-
-/* show a text box with the "note" a person has stored on the bottom of a calendar */
 export class ShowTask extends Component {
     render() {
         return (

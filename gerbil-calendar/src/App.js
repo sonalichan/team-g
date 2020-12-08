@@ -81,8 +81,8 @@ class App extends Component {
                 uid: this.state.user.uid,
                 events: [], // calendar events
                 eventsKey: [],
-                // tasks: [], // tasks
-                // tasksKey: [],
+                tasks: [], // tasks
+                tasksKey: [],
                 giftGallery: {
                   event: 0,
                   logIn: 0, 
