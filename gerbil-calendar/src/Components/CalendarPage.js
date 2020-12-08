@@ -115,7 +115,8 @@ export class CalendarPage extends Component {
               {this.state.noteInput}
             </div>
             <div>
-              <CreateTask />
+              <CreateTask 
+                user={this.props.user}/>
               <ShowTask />
             </div>
             <div className="gerbil-img">
