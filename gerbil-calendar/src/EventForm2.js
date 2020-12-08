@@ -120,12 +120,6 @@ export class CreateEvent extends Component {
         },
             () => {
                 console.log(firebase.database().ref());
-                /* let newEventKey = firebase.database().ref().child('posts').push().key;
-                let updates = {};
-                // push a newly created event to firebase
-                updates['/allData/events/' + newEventKey] = this.state.newEvent;
-                firebase.database().ref().update(updates);
-                this.setState({ modal: false, newEvent: {} }) */
             }
         )
     }
@@ -201,9 +195,6 @@ export class CreateEvent extends Component {
     }
 }
 
-/* WORK ON THIS LATER!!!!!!!!!!!!!! 
-NOT CONNECTED TO FULLCALENDAR- DONT NEED TO WORRY ABOUT CONNECTION
-*/
 export class CreateTask extends Component {
     constructor(props) {
         super(props);
@@ -253,14 +244,6 @@ export class CreateTask extends Component {
                 date: this.state.newTask.date
             }
         },
-            /* // push new Task to firebase
-            () => {
-                let newTaskKey = firebase.database().ref().child('posts').push().key;
-                let updates = {};
-                updates['/allData/tasks/' + newTaskKey] = this.state.newTask;
-                firebase.database().ref().update(updates);
-                this.setState({ modal: false, newTask: {} })
-            } */
         )
     }
 
