@@ -8,14 +8,6 @@ import { render } from 'react-dom';
 
 /* API documentation (add event, remove event, start event time etc):
 https://fullcalendar.io/docs
-
-in CreateEvent, to connect with FullCalendar, store:
-
-id
-title: EVENT TITLE (string)
-start: START TIME
-end: END TIME (null if not specified)
-What is the event about
 */
 
 
@@ -121,18 +113,19 @@ export class CreateEvent extends Component {
             newEvent: {
                 ...this.state.newEvent,
                 title: this.state.newEvent.title,
-                start: this.state.newEvent.start,
-                end: this.state.newEvent.end,
+                start: this.state.newEvent.date + "T" + this.state.newEvent.start + ":00",
+                end:  this.state.newEvent.date + "T" + this.state.newEvent.end + ":00",
                 description: this.state.newEvent.description
             }
         },
             () => {
-                let newEventKey = firebase.database().ref().child('posts').push().key;
+                console.log(firebase.database().ref());
+                /* let newEventKey = firebase.database().ref().child('posts').push().key;
                 let updates = {};
                 // push a newly created event to firebase
                 updates['/allData/events/' + newEventKey] = this.state.newEvent;
                 firebase.database().ref().update(updates);
-                this.setState({ modal: false, newEvent: {} })
+                this.setState({ modal: false, newEvent: {} }) */
             }
         )
     }
@@ -260,14 +253,14 @@ export class CreateTask extends Component {
                 date: this.state.newTask.date
             }
         },
-            // push new Task to firebase
+            /* // push new Task to firebase
             () => {
                 let newTaskKey = firebase.database().ref().child('posts').push().key;
                 let updates = {};
                 updates['/allData/tasks/' + newTaskKey] = this.state.newTask;
                 firebase.database().ref().update(updates);
                 this.setState({ modal: false, newTask: {} })
-            }
+            } */
         )
     }
 
