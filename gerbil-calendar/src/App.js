@@ -13,6 +13,7 @@ import { NavigationBar } from './Components/NavigationBar.js';
 import { HomePage } from './Components/HomePage.js';
 import { CalendarPage } from './Components/CalendarPage.js';
 import { GiftGalleryPage } from './Components/GiftGalleryPage.js';
+import AddNote from './Components/AddANote';
 
 class App extends Component {
   constructor(props) {
@@ -28,6 +29,10 @@ class App extends Component {
       ifLogIn: false, // save users log-in status
 
       userData: {
+        tasks: [], // tasks "notes"
+        firstDaywithGerbil: "",
+        numOfTotalEvents: 0,
+        numOfTotalTasks: 0,
         events: [], // calendar events
         eventsKey: [],
         // tasks: [], // tasks
@@ -178,6 +183,8 @@ class App extends Component {
                 })
               }
 
+              console.log(eventsKey);
+              console.log(dbEvents);
               // updates saved info from database to state
               this.setState(prevState => ({
                 userData: {
@@ -240,7 +247,7 @@ class App extends Component {
           <main>
               <Switch>
                 <Route exact path='/' render={() => (<HomePage />)} />      
-                <Route exact path='/calendar' render={() => (<CalendarPage ifLogIn={this.state.ifLogIn}/>)} />         
+                <Route exact path='/calendar' render={() => (<CalendarPage ifLogIn={this.state.ifLogIn} user={this.state.user} userData={this.state.userData}/>)} />         
                 <Route exact path='/giftGallery' render={() => (<GiftGalleryPage ifLogIn={this.state.ifLogIn} userData={this.state.userData}/>)} />            
                 <Redirect to="/" />
               </Switch>

@@ -35,7 +35,7 @@ export class NavigationBar extends Component {
                                 <NavLink tag={Link} to="/" activeClassName="active" exact>Who is Gerbil?</NavLink>
                             </NavItem>
                             <NavItem>
-                                <NavLink tag={Link} to="/calendar" activeClassName="active">Tell Gerbil your upcoming plan</NavLink>
+                                <NavLink tag={Link} to="/calendar" activeClassName="active">Tell Gerbil your upcoming plans</NavLink>
                             </NavItem>
                         </Nav>
                         <DropDown ifLogIn={this.props.ifLogIn} user={this.props.user} signInWithGoogle={this.props.signInWithGoogle} handleSignOut={this.props.handleSignOut} />
