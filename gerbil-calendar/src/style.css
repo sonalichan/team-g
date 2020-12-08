@@ -39,8 +39,24 @@ html, body, #root {
     background-color: #E5E2DD !important;
 }
 
+a.nav-item {
+    color: black !important;
+}
+
 .close {
     font-size: 40px !important;
+}
+
+a.dropdown-item:hover, a.dropdown-item.active, a.dropdown-item.focus {
+    background-color: #EFEEEA !important;
+    outline: none !important;
+    outline-offset: none !important;
+
+}
+
+a.dropdown-item:hover {
+    color: black !important;
+
 }
 
 /*** Home Page ***/

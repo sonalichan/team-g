@@ -29,7 +29,7 @@ export class NavigationBar extends Component {
                         Gerbil Calendar
                     </NavbarBrand>
                     <NavbarToggler/>
-                    <Collapse navbar>
+                    <Collapse isOpen={this.state.isOpen} navbar>
                         <Nav className="mr-auto mt-2 mt-lg-0 kurb-med" navbar>
                             <NavItem>
                                 <NavLink tag={Link} to="/" activeClassName="active" exact>Who is Gerbil?</NavLink>
@@ -54,10 +54,10 @@ export class DropDown extends Component {
             return (
                 <Nav className="right mt-2 mt-lg-0 kurb-med" navbar>
                     <UncontrolledDropdown nav inNavbar>
-                        <DropdownToggle nav caret>{this.props.user.displayName}</DropdownToggle>
+                        <DropdownToggle nav caret> {this.props.user.displayName}</DropdownToggle>
                         <DropdownMenu right>
                             <DropdownItem tag={Link} key="1" to="/giftGallery" activeStyle={{ textDecoration: 'none', color: 'black' }} >Gift Gallery</DropdownItem>
-                            <DropdownItem tag={Link} key="2" to="/" onClick={this.props.handleSignOut} >Log out</DropdownItem>
+                            <DropdownItem tag={Link} key="2" to="/logout" activeStyle={{ textDecoration: 'none', color: 'black' }} onClick={this.props.handleSignOut} >Log out</DropdownItem>
                         </DropdownMenu>
                     </UncontrolledDropdown>
                 </Nav>
