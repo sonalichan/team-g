@@ -355,7 +355,7 @@ class App extends Component {
           <main>
               <Switch>
                 <Route exact path='/' render={() => (<HomePage />)} />      
-                <Route exact path='/calendar' render={() => (<CalendarPage ifLogIn={this.state.ifLogIn}/>)} />         
+                <Route exact path='/calendar' render={() => (<CalendarPage ifLogIn={this.state.ifLogIn} user={this.state.user}/>)} />         
                 <Route exact path='/giftGallery' render={() => (<GiftGalleryPage ifLogIn={this.state.ifLogIn}/>)} />
                 <Route exact path='/modal' render={() => (<AddNote/>)} />                        
                 <Redirect to="/" />

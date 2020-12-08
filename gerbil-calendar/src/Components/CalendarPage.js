@@ -4,7 +4,6 @@ import { Col, Row, Card, CardImg, Form, FormGroup, FormText, Label, Input } from
 import ReactDOM from 'react-dom';
 import { CreateEvent, CreateTask, ShowTask } from "../EventForm2.js";
 
-import ReactDOM from 'react-dom';
 import FullCalendar from "@fullcalendar/react";
 import timeGridPlugin from '@fullcalendar/timegrid';
 
@@ -63,7 +62,13 @@ export class CalendarPage extends Component {
       });
     }
 
+    
     render() {
+      if(!this.props.ifLogIn){
+        return(
+          <div></div>
+        );
+      }
       var events = [
         { title: "today's event", date: new Date() }
       ];
@@ -74,7 +79,6 @@ export class CalendarPage extends Component {
       } else {
           renderModal = "";
       }
-
       console.log(this.state.noteInput);
 
       return (
@@ -86,7 +90,8 @@ export class CalendarPage extends Component {
             </div>
           {renderModal}
           <div id="buttons" align="right">
-            <CreateEvent />
+            <CreateEvent 
+              user={this.props.user}/>
             <Button color="secondary">&#x1f5b6;</Button>
           </div>
           
@@ -97,7 +102,8 @@ export class CalendarPage extends Component {
             events={events}
             eventClick={
               function(){
-                <CreateEvent />
+                <CreateEvent 
+                  user={this.props.user}/>
               }
             } 
           />
