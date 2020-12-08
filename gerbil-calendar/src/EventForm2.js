@@ -108,18 +108,34 @@ export class CreateEvent extends Component {
       description: 'Test Description', 
     */
     addNewEvent = () => {
-        console.log(this.state.newEvent)
         this.setState({
             newEvent: {
+
                 ...this.state.newEvent,
+                date: this.state.newEvent.date,
                 title: this.state.newEvent.title,
                 start: this.state.newEvent.date + "T" + this.state.newEvent.start + ":00",
-                end:  this.state.newEvent.date + "T" + this.state.newEvent.end + ":00",
+                end: this.state.newEvent.date + "T" + this.state.newEvent.end + ":00",
                 description: this.state.newEvent.description
             }
         },
             () => {
-                console.log(firebase.database().ref());
+                console.log(this.state.newEvent);
+                console.log(firebase.database().ref('users/' + this.props.user.uid));
+
+                let newEventKey = firebase.database().ref('users/' + this.props.user.uid).child('events').push().key;
+                let updates = {};
+                // push a newly created event to firebase
+                updates['/users/' + this.props.user.uid + '/events/' +  newEventKey] = this.state.newEvent;
+                firebase.database().ref().update(updates);
+                this.setState({ modal: false, newEvent: {} })
+                /* 
+                let newEventKey = firebase.database().ref().child('posts').push().key;
+                let updates = {};
+                // push a newly created event to firebase
+                updates['/allData/events/' + newEventKey] = this.state.newEvent;
+                firebase.database().ref().update(updates);
+                this.setState({ modal: false, newEvent: {} }) */
             }
         )
     }
@@ -306,15 +322,15 @@ export class ShowTask extends Component {
     render() {
         return (
             <div>
-            <Toast>
-                <ToastHeader>
-                Coming Up Next Week
+                <Toast>
+                    <ToastHeader>
+                        Coming Up Next Week
                 </ToastHeader>
-                <ToastBody>
-                    This textbox will display the user's Task from the Add a Note button (CreateTask)!
-                    And the date
+                    <ToastBody>
+                        This textbox will display the user's Task from the Add a Note button (CreateTask)!
+                        And the date
                  </ToastBody>
-            </Toast>
+                </Toast>
             </div>
         );
     }
