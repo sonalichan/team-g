@@ -3,7 +3,7 @@ import './style.css';
 
 import React, { Component } from 'react';
 import './index.css'; // css file
-import { Route, Switch, Redirect, Router } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 
 import firebase from 'firebase/app';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
@@ -37,102 +37,7 @@ class App extends Component {
         eventsKey: [],
         // tasks: [], // tasks
         // tasksKey: [],
-        giftGallery: {
-          event: 0, // events counter
-          logIn: 0, // login counter
-          giftGallery: [
-              {
-                  id: 1,
-                  giftName: "South Korea",
-                  url: "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/close-up-of-tulips-blooming-in-field-royalty-free-image-1584131616.jpg?crop=1.00xw:0.798xh;0,0.202xh&resize=980:*",
-                  requirementText: "add 1 event to calendar",
-                  req: "event",
-                  reqNum: 1,
-                  earned: false
-              },
-              {
-                  id: 2,
-                  giftName: "China",
-                  url: "https://api.time.com/wp-content/uploads/2019/08/better-smartphone-photos.jpg?w=600&quality=85",
-                  requirementText: "add 5 event to calendar",
-                  req: "event",
-                  reqNum: 5,
-                  earned: false
-              },
-              {
-                  id: 3,
-                  giftName: "United States",
-                  url: "https://cnet3.cbsistatic.com/img/-qQkzFVyOPEoBRS7K5kKS0GFDvk=/940x0/2020/04/16/7d6d8ed2-e10c-4f91-b2dd-74fae951c6d8/bazaart-edit-app.jpg",
-                  requirementText: "add 20 event to calendar",
-                  req: "event",
-                  reqNum: 20,
-                  earned: false
-              },
-              {
-                  id: 4,
-                  giftName: "Japan",
-                  url: "https://i2.wp.com/www.wintersexpress.com/files/2019/08/IMG_4605.sunflower.jpg?fit=2546%2C3363&ssl=1",
-                  requirementText: "add 50 event to calendar",
-                  req: "event",
-                  reqNum: 50,
-                  earned: false
-              },
-              {
-                  id: 5,
-                  giftName: "Mexico",
-                  url: "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/close-up-of-tulips-blooming-in-field-royalty-free-image-1584131616.jpg?crop=1.00xw:0.798xh;0,0.202xh&resize=980:*",
-                  requirementText: "add 100 event to calendar",
-                  req: "event",
-                  reqNum: 100,
-                  earned: false
-              },
-              {
-                  id: 6,
-                  giftName: "Australia",
-                  url: "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/close-up-of-tulips-blooming-in-field-royalty-free-image-1584131616.jpg?crop=1.00xw:0.798xh;0,0.202xh&resize=980:*",
-                  requirementText: "log-in 1 time",
-                  req: "log-in",
-                  reqNum: 1,
-                  earned: false
-              },
-              {
-                  id: 7,
-                  giftName: "India",
-                  url: "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/close-up-of-tulips-blooming-in-field-royalty-free-image-1584131616.jpg?crop=1.00xw:0.798xh;0,0.202xh&resize=980:*",
-                  requirementText: "log-in 5 times",
-                  req: "log-in",
-                  reqNum: 5,
-                  earned: false
-              },
-              {
-                  id: 8,
-                  giftName: "Vietnam",
-                  url: "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/close-up-of-tulips-blooming-in-field-royalty-free-image-1584131616.jpg?crop=1.00xw:0.798xh;0,0.202xh&resize=980:*",
-                  requirementText: "log-in 10 times",
-                  req: "log-in",
-                  reqNum: 10,
-                  earned: false
-              },
-              {
-                  id: 9,
-                  giftName: "New Zealand",
-                  url: "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/close-up-of-tulips-blooming-in-field-royalty-free-image-1584131616.jpg?crop=1.00xw:0.798xh;0,0.202xh&resize=980:*",
-                  requirementText: "Log-in 15 times",
-                  req: "log-in",
-                  reqNum: 15,
-                  earned: false
-              },
-              {
-                  id: 10,
-                  giftName: "France",
-                  url: "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/close-up-of-tulips-blooming-in-field-royalty-free-image-1584131616.jpg?crop=1.00xw:0.798xh;0,0.202xh&resize=980:*",
-                  requirementText: "Log-in 20 times",
-                  req: "log-in",
-                  reqNum: 20,
-                  earned: false
-              }
-          ]
-        }
+        giftGallery: null
       },
 
       user: null // firebase user
@@ -161,7 +66,6 @@ class App extends Component {
 
     this.authUnRegFunc = firebase.auth().onAuthStateChanged((firebaseUser) => {
       // if a user signs in
-      console.log(firebaseUser);
       if (firebaseUser !== null) {
         this.setState({ user: firebaseUser })
         // if a member signs in
@@ -279,40 +183,39 @@ class App extends Component {
             }
 
             let value = snapshot.val();
+            console.log(value);
 
             if (value !== null) {
               // if the member had favorited before
+              let dbEvents = [];
+              let eventsKey = [];
               if (value.events !== undefined & value.events !== null) {
-                let eventsKey = Object.keys(value.events);
-                let dbEvents = eventsKey.map((item) => {
+                eventsKey = Object.keys(value.events);
+                dbEvents = eventsKey.map((item) => {
                   return value.events[item];
                 })
-                // updates saved info from database to state
-                this.setState(prevState => ({
-                  userData: {
-                    ...prevState.firebaseData,
-                    events: dbEvents,
-                    eventsKey: eventsKey
-                    // tasks: dbTasks,
-                    // tasksKey: tasksKey
-                  }
-                }))
-              } else {
-                this.setState(prevState => ({
-                  userData: {
-                    ...prevState.firebaseData,
-                    events: [],
-                    eventsKey: []
-                    // tasks: [],
-                    // tasksKey: []
-                  }
-                }))
               }
+
+              // updates saved info from database to state
+              this.setState(prevState => ({
+                userData: {
+                  ...prevState.firebaseData,
+                  events: dbEvents,
+                  eventsKey: eventsKey,
+                  giftGallery: value.giftGallery
+                  // tasks: dbTasks,
+                  // tasksKey: tasksKey
+                }
+              }));
             }
           })
         } 
       } else {
-        this.setState({ user: null, ifLogIn: false })
+        this.setState({ 
+          user: null, 
+          ifLogIn: false,
+          userData: null 
+        });
       }
     })
   }
@@ -356,8 +259,7 @@ class App extends Component {
               <Switch>
                 <Route exact path='/' render={() => (<HomePage />)} />      
                 <Route exact path='/calendar' render={() => (<CalendarPage ifLogIn={this.state.ifLogIn} user={this.state.user}/>)} />         
-                <Route exact path='/giftGallery' render={() => (<GiftGalleryPage ifLogIn={this.state.ifLogIn}/>)} />
-                <Route exact path='/modal' render={() => (<AddNote/>)} />                        
+                <Route exact path='/giftGallery' render={() => (<GiftGalleryPage ifLogIn={this.state.ifLogIn} userData={this.state.userData}/>)} />            
                 <Redirect to="/" />
               </Switch>
           </main>
