@@ -39,19 +39,6 @@ class App extends Component {
     };
   };
 
-
-  // signInWithGoogle = () => {
-  //   this.props.firebaseAppAuth.signInWithPopup(this.props.googleProvider).then((res) => {
-  //     console.log(res.user);
-  //     this.setState({ 
-  //       user: res.user,
-  //       ifLogIn: true
-  //     });
-  //   }).catch((error) => {
-  //     console.log(error.message)
-  //   })
-  // }
-
   signInWithGoogle = () => {
     this.setState({ ifLogIn: true });
   }
@@ -97,7 +84,7 @@ class App extends Component {
                           url: "https://api.time.com/wp-content/uploads/2019/08/better-smartphone-photos.jpg?w=600&quality=85",
                           requirementText: "add 5 event to calendar",
                           req: "event",
-                          reqNum: 5,
+                          reqNum: 10,
                           earned: false
                       },
                       {
@@ -132,7 +119,7 @@ class App extends Component {
                           giftName: "Australia",
                           url: "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/close-up-of-tulips-blooming-in-field-royalty-free-image-1584131616.jpg?crop=1.00xw:0.798xh;0,0.202xh&resize=980:*",
                           requirementText: "log-in 1 time",
-                          req: "log-in",
+                          req: "Secret",
                           reqNum: 1,
                           earned: false
                       },
@@ -141,7 +128,7 @@ class App extends Component {
                           giftName: "India",
                           url: "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/close-up-of-tulips-blooming-in-field-royalty-free-image-1584131616.jpg?crop=1.00xw:0.798xh;0,0.202xh&resize=980:*",
                           requirementText: "log-in 5 times",
-                          req: "log-in",
+                          req: "Secret",
                           reqNum: 5,
                           earned: false
                       },
@@ -150,7 +137,7 @@ class App extends Component {
                           giftName: "Vietnam",
                           url: "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/close-up-of-tulips-blooming-in-field-royalty-free-image-1584131616.jpg?crop=1.00xw:0.798xh;0,0.202xh&resize=980:*",
                           requirementText: "log-in 10 times",
-                          req: "log-in",
+                          req: "Secret",
                           reqNum: 10,
                           earned: false
                       },
@@ -159,7 +146,7 @@ class App extends Component {
                           giftName: "New Zealand",
                           url: "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/close-up-of-tulips-blooming-in-field-royalty-free-image-1584131616.jpg?crop=1.00xw:0.798xh;0,0.202xh&resize=980:*",
                           requirementText: "Log-in 15 times",
-                          req: "log-in",
+                          req: "Secret",
                           reqNum: 15,
                           earned: false
                       },
@@ -167,8 +154,8 @@ class App extends Component {
                           id: 10,
                           giftName: "France",
                           url: "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/close-up-of-tulips-blooming-in-field-royalty-free-image-1584131616.jpg?crop=1.00xw:0.798xh;0,0.202xh&resize=980:*",
-                          requirementText: "Log-in 20 times",
-                          req: "log-in",
+                          requirementText: "Secret",
+                          req: "Secret",
                           reqNum: 20,
                           earned: false
                       }

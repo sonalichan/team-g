@@ -62,16 +62,16 @@ export class GiftGalleryPage extends Component {
                         id: 6,
                         giftName: "Australia",
                         url: "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/close-up-of-tulips-blooming-in-field-royalty-free-image-1584131616.jpg?crop=1.00xw:0.798xh;0,0.202xh&resize=980:*",
-                        requirementText: "log-in 1 time",
+                        requirementText: "Secret",
                         req: "log-in",
-                        reqNum: 1,
+                        reqNum: 2,
                         earned: false
                     },
                     {
                         id: 7,
                         giftName: "India",
                         url: "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/close-up-of-tulips-blooming-in-field-royalty-free-image-1584131616.jpg?crop=1.00xw:0.798xh;0,0.202xh&resize=980:*",
-                        requirementText: "log-in 5 times",
+                        requirementText: "Secret",
                         req: "log-in",
                         reqNum: 5,
                         earned: false
@@ -80,7 +80,7 @@ export class GiftGalleryPage extends Component {
                         id: 8,
                         giftName: "Vietnam",
                         url: "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/close-up-of-tulips-blooming-in-field-royalty-free-image-1584131616.jpg?crop=1.00xw:0.798xh;0,0.202xh&resize=980:*",
-                        requirementText: "log-in 10 times",
+                        requirementText: "Secret",
                         req: "log-in",
                         reqNum: 10,
                         earned: false
@@ -89,7 +89,7 @@ export class GiftGalleryPage extends Component {
                         id: 9,
                         giftName: "New Zealand",
                         url: "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/close-up-of-tulips-blooming-in-field-royalty-free-image-1584131616.jpg?crop=1.00xw:0.798xh;0,0.202xh&resize=980:*",
-                        requirementText: "Log-in 15 times",
+                        requirementText: "Secret",
                         req: "log-in",
                         reqNum: 15,
                         earned: false
@@ -98,7 +98,7 @@ export class GiftGalleryPage extends Component {
                         id: 10,
                         giftName: "France",
                         url: "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/close-up-of-tulips-blooming-in-field-royalty-free-image-1584131616.jpg?crop=1.00xw:0.798xh;0,0.202xh&resize=980:*",
-                        requirementText: "Log-in 20 times",
+                        requirementText: "Secret",
                         req: "log-in",
                         reqNum: 20,
                         earned: false
@@ -217,8 +217,7 @@ export class GiftGalleryPage extends Component {
         }
 
         let gerbilGifts;
-
-        gerbilGifts = this.props.userData.giftGallery.map((gift) => {
+        gerbilGifts = this.props.userData.giftGallery.giftGallery.map((gift) => {
             return <GiftCard key={gift.id} data={gift} />;
         })
 
