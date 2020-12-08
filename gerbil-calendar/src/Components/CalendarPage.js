@@ -69,9 +69,7 @@ export class CalendarPage extends Component {
           <div></div>
         );
       }
-      var events = [
-        { title: "today's event", date: new Date() }
-      ];
+      var events = this.props.userData.events;
 
       let renderModal;
       if (this.state.modal) {

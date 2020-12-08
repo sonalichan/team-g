@@ -196,6 +196,8 @@ class App extends Component {
                 })
               }
 
+              console.log(eventsKey);
+              console.log(dbEvents);
               // updates saved info from database to state
               this.setState(prevState => ({
                 userData: {
@@ -258,7 +260,7 @@ class App extends Component {
           <main>
               <Switch>
                 <Route exact path='/' render={() => (<HomePage />)} />      
-                <Route exact path='/calendar' render={() => (<CalendarPage ifLogIn={this.state.ifLogIn} user={this.state.user}/>)} />         
+                <Route exact path='/calendar' render={() => (<CalendarPage ifLogIn={this.state.ifLogIn} user={this.state.user} userData={this.state.userData}/>)} />         
                 <Route exact path='/giftGallery' render={() => (<GiftGalleryPage ifLogIn={this.state.ifLogIn} userData={this.state.userData}/>)} />            
                 <Redirect to="/" />
               </Switch>
