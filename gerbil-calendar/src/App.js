@@ -29,6 +29,10 @@ class App extends Component {
       ifLogIn: false, // save users log-in status
 
       userData: {
+        tasks: [], // tasks "notes"
+        firstDaywithGerbil: "",
+        numOfTotalEvents: 0,
+        numOfTotalTasks: 0,
         events: [], // calendar events
         eventsKey: [],
         // tasks: [], // tasks
