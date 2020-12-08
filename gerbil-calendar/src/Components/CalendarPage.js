@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { Col, Row, Card, CardImg, Form, FormGroup, FormText, Label, Input } from 'reactstrap';
 import ReactDOM from 'react-dom';
-import { CreateEvent, CreateTask, ShowTask } from "../EventForm2.js";
+import { CreateEvent, CreateTask, ShowTask } from "../Components/EventForm2.js";
 
 import FullCalendar from "@fullcalendar/react";
 import timeGridPlugin from '@fullcalendar/timegrid';
@@ -71,11 +71,12 @@ export class CalendarPage extends Component {
           </div>
         );
       }
+
       var events = this.props.userData.events;
 
       let renderModal;
       if (this.state.modal) {
-          renderModal = <RenderEventModal modal={this.state.modal} closeModal={this.closeModal}/>;
+          renderModal = <RenderEventModal modal={this.state.modal} />;
       } else {
           renderModal = "";
       }
@@ -91,7 +92,7 @@ export class CalendarPage extends Component {
           {renderModal}
           <div id="buttons" align="right">
             <CreateEvent 
-              user={this.props.user}/>
+              user={this.props.user} userData={this.props.userData} closeModal={this.closeModal} showGiftModal={this.props.showGiftModal}/>
             <Button color="secondary">&#x1f5b6;</Button>
           </div>
           
@@ -103,7 +104,7 @@ export class CalendarPage extends Component {
             eventClick={
               function(){
                 <CreateEvent 
-                  user={this.props.user}/>
+                  user={this.props.user} userData={this.props.userData} closeModal={this.closeModal} showGiftModal={this.props.showGiftModal}/>
               }
             } 
           />

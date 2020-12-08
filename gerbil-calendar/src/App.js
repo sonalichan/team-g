@@ -4,6 +4,8 @@ import './style.css';
 import React, { Component } from 'react';
 import './index.css'; // css file
 import { Route, Switch, Redirect } from 'react-router-dom';
+import { Modal, ModalHeader, ModalBody } from 'reactstrap';
+
 
 import firebase from 'firebase/app';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
@@ -13,7 +15,6 @@ import { NavigationBar } from './Components/NavigationBar.js';
 import { HomePage } from './Components/HomePage.js';
 import { CalendarPage } from './Components/CalendarPage.js';
 import { GiftGalleryPage } from './Components/GiftGalleryPage.js';
-import AddNote from './Components/AddANote';
 
 class App extends Component {
   constructor(props) {
@@ -27,12 +28,10 @@ class App extends Component {
       },
 
       ifLogIn: false, // save users log-in status
+      giftModal: false,
+      giftObtained: {},
 
       userData: {
-        tasks: [], // tasks "notes"
-        firstDaywithGerbil: "",
-        numOfTotalEvents: 0,
-        numOfTotalTasks: 0,
         events: [], // calendar events
         eventsKey: [],
         // tasks: [], // tasks
@@ -42,6 +41,9 @@ class App extends Component {
 
       user: null // firebase user
     };
+
+    this.closeGiftModal = this.closeGiftModal.bind(this);
+
   };
 
   signInWithGoogle = () => {
@@ -89,7 +91,7 @@ class App extends Component {
                           url: "https://api.time.com/wp-content/uploads/2019/08/better-smartphone-photos.jpg?w=600&quality=85",
                           requirementText: "add 5 event to calendar",
                           req: "event",
-                          reqNum: 10,
+                          reqNum: 5,
                           earned: false
                       },
                       {
@@ -123,8 +125,8 @@ class App extends Component {
                           id: 6,
                           giftName: "Australia",
                           url: "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/close-up-of-tulips-blooming-in-field-royalty-free-image-1584131616.jpg?crop=1.00xw:0.798xh;0,0.202xh&resize=980:*",
-                          requirementText: "log-in 1 time",
-                          req: "Secret",
+                          requirementText: "Secret",
+                          req: "log-in",
                           reqNum: 1,
                           earned: false
                       },
@@ -132,8 +134,8 @@ class App extends Component {
                           id: 7,
                           giftName: "India",
                           url: "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/close-up-of-tulips-blooming-in-field-royalty-free-image-1584131616.jpg?crop=1.00xw:0.798xh;0,0.202xh&resize=980:*",
-                          requirementText: "log-in 5 times",
-                          req: "Secret",
+                          requirementText: "Secret",
+                          req: "log-in",
                           reqNum: 5,
                           earned: false
                       },
@@ -141,8 +143,8 @@ class App extends Component {
                           id: 8,
                           giftName: "Vietnam",
                           url: "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/close-up-of-tulips-blooming-in-field-royalty-free-image-1584131616.jpg?crop=1.00xw:0.798xh;0,0.202xh&resize=980:*",
-                          requirementText: "log-in 10 times",
-                          req: "Secret",
+                          requirementText: "Secret",
+                          req: "log-in",
                           reqNum: 10,
                           earned: false
                       },
@@ -150,8 +152,8 @@ class App extends Component {
                           id: 9,
                           giftName: "New Zealand",
                           url: "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/close-up-of-tulips-blooming-in-field-royalty-free-image-1584131616.jpg?crop=1.00xw:0.798xh;0,0.202xh&resize=980:*",
-                          requirementText: "Log-in 15 times",
-                          req: "Secret",
+                          requirementText: "Secret",
+                          req: "log-in",
                           reqNum: 15,
                           earned: false
                       },
@@ -160,7 +162,7 @@ class App extends Component {
                           giftName: "France",
                           url: "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/close-up-of-tulips-blooming-in-field-royalty-free-image-1584131616.jpg?crop=1.00xw:0.798xh;0,0.202xh&resize=980:*",
                           requirementText: "Secret",
-                          req: "Secret",
+                          req: "log-in",
                           reqNum: 20,
                           earned: false
                       }
@@ -177,14 +179,13 @@ class App extends Component {
               let dbEvents = [];
               let eventsKey = [];
               if (value.events !== undefined & value.events !== null) {
+                console.log(value.events);
                 eventsKey = Object.keys(value.events);
                 dbEvents = eventsKey.map((item) => {
                   return value.events[item];
-                })
+                });
               }
 
-              console.log(eventsKey);
-              console.log(dbEvents);
               // updates saved info from database to state
               this.setState(prevState => ({
                 userData: {
@@ -228,6 +229,19 @@ class App extends Component {
     signInFlow: 'popup',
   }
 
+  //  close gift modal
+  closeGiftModal = () => {
+    this.setState({
+        giftModal: false
+    });
+  }
+  
+  showGiftModal = (gift) => {
+    this.setState({
+      giftModal: true,
+      giftObtained: gift
+    })
+  }
 
   render() {
     let content = null;
@@ -235,6 +249,14 @@ class App extends Component {
     if (this.state.user == null && this.state.ifLogIn) {
       content = <StyledFirebaseAuth uiConfig={this.uiConfig} firebaseAuth={firebase.auth()} />
     } else {
+
+      let renderGiftModal;
+      if (this.state.giftModal) {
+        renderGiftModal = <RenderGiftModal gift={this.state.giftObtained} closeGiftModal={this.closeGiftModal} giftModal={this.state.giftModal}/>;
+      } else {
+        renderGiftModal = "";
+      }
+
       content = (
         <div>
           <header>
@@ -247,11 +269,18 @@ class App extends Component {
           <main>
               <Switch>
                 <Route exact path='/' render={() => (<HomePage />)} />      
-                <Route exact path='/calendar' render={() => (<CalendarPage ifLogIn={this.state.ifLogIn} user={this.state.user} userData={this.state.userData}/>)} />         
-                <Route exact path='/giftGallery' render={() => (<GiftGalleryPage ifLogIn={this.state.ifLogIn} userData={this.state.userData}/>)} />            
+                <Route exact path='/calendar' render={() => (<CalendarPage 
+                  ifLogIn={this.state.ifLogIn} 
+                  userData={this.state.userData} 
+                  user={this.state.user}
+                  showGiftModal={this.showGiftModal}/>)} />     
+                <Route exact path='/giftGallery' render={() => (<GiftGalleryPage 
+                  ifLogIn={this.state.ifLogIn} 
+                  userData={this.state.userData}/>)} />            
                 <Redirect to="/" />
               </Switch>
           </main>
+          {renderGiftModal}
         </div >
       );
     }
@@ -264,5 +293,25 @@ class App extends Component {
   }
 
 }
+
+
+class RenderGiftModal extends Component {
+      render() {
+          let giftObtained = this.props.gift;
+          return (
+              <Modal isOpen={this.props.giftModal} toggle={this.props.closeGiftModal}>
+                  <ModalHeader toggle={this.props.closeGiftModal} className="gerbil-text-1">Gerbil's secret gift</ModalHeader>
+                  <ModalBody>
+                      <p className="gerbil-gift-message gerbil-text-1">Thanks for telling me all of your story! Here is a secret gift!!! Hope you like it!</p>
+                      <div className="gerbil-gift">
+                          <img alt="Gerbil's Gift" src={giftObtained.url} />
+                      </div>
+                      <div className="gerbil-gift-name gerbil-text-1">{giftObtained.giftName}</div>
+                  </ModalBody>
+              </Modal>
+          );
+      }
+  }
+  
 
 export default App;

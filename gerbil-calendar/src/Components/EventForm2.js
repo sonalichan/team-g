@@ -126,27 +126,84 @@ export class CreateEvent extends Component {
                 end: this.state.newEvent.date + "T" + this.state.newEvent.end + ":00",
                 description: this.state.newEvent.description
             }
-        },
-            () => {
-                console.log(this.state.newEvent);
-                console.log(firebase.database().ref('users/' + this.props.user.uid));
+        }, () => {
+            console.log(this.state.newEvent);
+            console.log(firebase.database().ref('users/' + this.props.user.uid));
 
-                let newEventKey = firebase.database().ref('users/' + this.props.user.uid).child('events').push().key;
-                let updates = {};
-                // push a newly created event to firebase
-                updates['/users/' + this.props.user.uid + '/events/' +  newEventKey] = this.state.newEvent;
-                firebase.database().ref().update(updates);
-                this.setState({ modal: false, newEvent: {} })
-                /* 
-                let newEventKey = firebase.database().ref().child('posts').push().key;
-                let updates = {};
-                // push a newly created event to firebase
-                updates['/allData/events/' + newEventKey] = this.state.newEvent;
-                firebase.database().ref().update(updates);
-                this.setState({ modal: false, newEvent: {} }) */
+            let newEventKey = firebase.database().ref('users/' + this.props.user.uid).child('events').push().key;
+            let updates = {};
+            
+            // push a newly created event to firebase
+            updates['/users/' + this.props.user.uid + '/events/' +  newEventKey] = this.state.newEvent;
+            
+            // update gift gallery
+            let updatedGiftGallery = this.findEventGift();
+            let ifGiftObtained = false;
+            if (updatedGiftGallery.modal) {
+                ifGiftObtained = true;
             }
-        )
+
+            updates['/users/' + this.props.user.uid + '/giftGallery/event'] = updatedGiftGallery.user.event;
+            updates['/users/' + this.props.user.uid + '/giftGallery/giftGallery'] = updatedGiftGallery.user.giftGallery;
+            firebase.database().ref().update(updates);
+            this.setState({ 
+                modal: false, newEvent: {} 
+            }, () => {
+                if (updatedGiftGallery.modal) {
+                    this.props.showGiftModal(updatedGiftGallery.giftObtained);
+                }
+            });
+
+            /* 
+            let newEventKey = firebase.database().ref().child('posts').push().key;
+            let updates = {};
+            // push a newly created event to firebase
+            updates['/allData/events/' + newEventKey] = this.state.newEvent;
+            firebase.database().ref().update(updates);
+            this.setState({ modal: false, newEvent: {} }) */
+        });
     }
+
+    findEventGift = () => {
+        console.log(this.props.userData);        
+        let gifts = this.props.userData.giftGallery.giftGallery; 
+        let numOfEvents = this.props.userData.giftGallery.event + 1;
+        let ifGiftObtained = false;
+        let giftObtained = {};
+        gifts = gifts.map((gift) => {
+            // if gift is already earned, do nothing
+            if (gift.earned) {
+                return gift;
+            }
+
+            // if gift's requirement is not event-related, do nothing
+            if (gift.req !== "event") {
+                return gift;
+            }
+
+            // if gift's requirement num is not reached, do nothing
+            if (numOfEvents < gift.reqNum) {
+                return gift;
+            } 
+
+            gift.earned = true;
+            ifGiftObtained = true;
+            giftObtained = gift;
+            return gift;
+        });
+
+        let returned = {
+            "modal": ifGiftObtained,
+            "giftObtained": giftObtained,
+            "user": {
+                "event": numOfEvents,
+                "giftGallery": gifts
+            }
+        }
+
+        return returned;
+    }
+
 
     render() {
         return (
