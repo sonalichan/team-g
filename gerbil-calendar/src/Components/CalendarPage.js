@@ -66,7 +66,9 @@ export class CalendarPage extends Component {
     render() {
       if(!this.props.ifLogIn){
         return(
-          <div></div>
+          <div className="warning">
+              <div className="warning-message gerbil-text-1">You haven't log-in yet! Click "Sign In" on the top right to let Gerbil know who you are!</div>
+          </div>
         );
       }
       var events = this.props.userData.events;
