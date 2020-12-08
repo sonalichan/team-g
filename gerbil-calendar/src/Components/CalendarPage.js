@@ -74,26 +74,15 @@ export class CalendarPage extends Component {
 
       var events = this.props.userData.events;
 
-      let renderModal;
-      if (this.state.modal) {
-          renderModal = <RenderEventModal modal={this.state.modal} />;
-      } else {
-          renderModal = "";
-      }
       console.log(this.state.noteInput);
 
       return (
-        <div>
-            <h1>Hello, {this.props.user.displayName}</h1>
-            <div className="calendar-button">
-              <Button onClick={this.addEvent} color="primary">+ Add a Schedule</Button>
-              <Button onClick={() => window.print()} color="secondary">&#x1f5b6; Print</Button>
-            </div>
-          {renderModal}
-          <div id="buttons" align="right">
+        <div id="calendarPage">
+          <h1>Hello, {this.props.user.displayName}</h1>
+          <div className="calendar-button" align="right">
             <CreateEvent 
               user={this.props.user} userData={this.props.userData} closeModal={this.closeModal} showGiftModal={this.props.showGiftModal}/>
-            <Button color="secondary">&#x1f5b6;</Button>
+            <Button onClick={() => window.print()} color="secondary">&#x1f5b6; Print</Button>
           </div>
           
           
@@ -101,6 +90,10 @@ export class CalendarPage extends Component {
             defaultView="dayGridMonth"
             plugins={[timeGridPlugin]}
             events={events}
+            allDaySlot={false}
+            slotMinTime="7:00:00"
+            slotMaxTime="24:00:00"
+            height="auto"
             eventClick={
               function(){
                 <CreateEvent 
@@ -119,7 +112,6 @@ export class CalendarPage extends Component {
             </div>
             <div>
               <CreateTask />
-              <ShowTask />
             </div>
             <div className="gerbil-img">
               <img src="/img/gerbil-image.png" alt="a gerbil's picture" />
@@ -129,30 +121,6 @@ export class CalendarPage extends Component {
       );
     }}
 
-
-class RenderEventModal extends Component {
-  constructor(props) {
-      super(props);
-      this.state = {
-          newEvent: {}
-      };
-  }
-  
-
-  render() {
-    return (
-      <div>
-        <Modal isOpen={this.props.modal} toggle={this.props.closeModal}>
-            <ModalHeader toggle={this.props.closeModal} className="gerbil-text-1">Add Event Modal</ModalHeader>
-            <ModalBody>
-                
-            </ModalBody>
-          </Modal>
-      </div>
-    );
-  }
-
-}
 
   const rootElement = document.getElementById("root");
   ReactDOM.render(<CalendarPage />, rootElement);
