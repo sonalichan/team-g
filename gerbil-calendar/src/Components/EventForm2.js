@@ -90,9 +90,6 @@ export class CreateEvent extends Component {
         }, () => {
             console.log(this.state.newEvent);
             console.log(firebase.database().ref('users/' + this.props.user.uid));
-
-            let newEventKey = firebase.database().ref('users/' + this.props.user.uid).child('events').push().key;
-            let updates = {};
             
             // push a newly created event to firebase
             updates['/users/' + this.props.user.uid + '/events/' +  newEventKey] = this.state.newEvent;
