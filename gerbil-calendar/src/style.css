@@ -371,7 +371,7 @@ a.dropdown-item:hover {
 #task-note-section #task-section #task-list, #note-section #notes {
     padding: 15px 25px;
     background-color: #D0C6BA;
-    height: 25vh;
+    height: 23vh;
     overflow-y: auto;
 
 }
