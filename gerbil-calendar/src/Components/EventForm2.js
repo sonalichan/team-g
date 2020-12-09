@@ -88,12 +88,12 @@ export class CreateEvent extends Component {
                 description: this.state.newEvent.description
             }
         }, () => {
-            console.log(this.state.newEvent);
-            console.log(firebase.database().ref('users/' + this.props.user.uid));
-            
-            // push a newly created event to firebase
-            updates['/users/' + this.props.user.uid + '/events/' +  newEventKey] = this.state.newEvent;
-            
+            let newEventKey = firebase.database().ref('users/' + this.props.user.uid).child('events').push().key;
+            let updates = {};
+
+            // push newly created event to firebase
+            updates['/users/' + this.props.user.uid + '/events/' + newEventKey] = this.state.newEvent;
+           
             // update gift gallery
             let updatedGiftGallery = this.findEventGift();
             let ifGiftObtained = false;
@@ -101,13 +101,31 @@ export class CreateEvent extends Component {
                 ifGiftObtained = true;
             }
 
-                let newEventKey = firebase.database().ref('users/' + this.props.user.uid).child('events').push().key;
-                let updates = {};
+            updates['/users/' + this.props.user.uid + '/giftGallery/event'] = updatedGiftGallery.user.event;
+            updates['/users/' + this.props.user.uid + '/giftGallery/giftGallery'] = updatedGiftGallery.user.giftGallery;
+            firebase.database().ref().update(updates);
+            
+            this.setState({ 
+                modal: false, newEvent: {} 
+            }, () => {
+                if (updatedGiftGallery.modal) {
+                    this.props.showGiftModal(updatedGiftGallery.giftObtained);
+                }
+            });
+        });
+    }
 
-                // push newly created event to firebase
-                updates['/users/' + this.props.user.uid + '/events/' + newEventKey] = this.state.newEvent;
-                firebase.database().ref().update(updates);
-                this.setState({ modal: false, newEvent: {} })
+    findEventGift = () => {
+        console.log(this.props.userData);        
+        let gifts = this.props.userData.giftGallery.giftGallery; 
+        let numOfEvents = this.props.userData.giftGallery.event + 1;
+        let ifGiftObtained = false;
+        let giftObtained = {};
+        gifts = gifts.map((gift) => {
+            // if gift is already earned, do nothing
+            if (gift.earned) {
+                return gift;
+            }
 
             // if gift's requirement is not event-related, do nothing
             if (gift.req !== "event") {
@@ -124,6 +142,7 @@ export class CreateEvent extends Component {
             giftObtained = gift;
             return gift;
         });
+    
 
         let returned = {
             "modal": ifGiftObtained,
