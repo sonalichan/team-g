@@ -70,8 +70,8 @@ class App extends Component {
                 uid: this.state.user.uid,
                 events: [], // calendar events
                 eventsKey: [],
-                // tasks: [], // tasks
-                // tasksKey: [],
+                tasks: [], // tasks
+                tasksKey: [],
                 giftGallery: {
                   event: 0,
                   logIn: 0, 
@@ -186,15 +186,26 @@ class App extends Component {
                 });
               }
 
+              let dbTasks = [];
+              let tasksKey = [];
+              if (value.tasks !== undefined & value.tasks !== null) {
+                tasksKey = Object.keys(value.tasks);
+                dbTasks = tasksKey.map((item) => {
+                  return value.tasks[item];
+                })
+              }
+
+              console.log(eventsKey);
+              console.log(dbEvents);
               // updates saved info from database to state
               this.setState(prevState => ({
                 userData: {
                   ...prevState.firebaseData,
                   events: dbEvents,
                   eventsKey: eventsKey,
-                  giftGallery: value.giftGallery
-                  // tasks: dbTasks,
-                  // tasksKey: tasksKey
+                  giftGallery: value.giftGallery,
+                  tasks: dbTasks,
+                  tasksKey: tasksKey
                 }
               }));
             }
