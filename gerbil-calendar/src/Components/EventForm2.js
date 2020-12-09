@@ -1,7 +1,7 @@
 import React, { useState, Component } from 'react';
 import { Row, Col, Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 import { Modal, ModalHeader, ModalBody, ModalFooter, Toast, ToastHeader, ToastBody } from 'reactstrap';
-import { AvForm, AvField } from 'availity-reactstrap-validation';
+//import { AvForm, AvField } from 'availity-reactstrap-validation';
 
 import firebase from 'firebase/app';
 import { render } from 'react-dom';
@@ -167,11 +167,11 @@ export class CreateEvent extends Component {
             <div>
                 <Button color="danger" onClick={this.toggle}>+ Add A Schedule</Button>
                 <Modal isOpen={this.state.modal} toggle={this.toggle}>
-                    <ModalHeader toggle={this.toggle}>Modal title</ModalHeader>
+                    <ModalHeader toggle={this.toggle}>Create Event</ModalHeader>
                     <ModalBody>
                         <Form>
                             <div>
-                                <h1>"Tell me more about the Event!"</h1>
+                                <h1>Tell me more about the Event!</h1>
                             </div>
                             <FormGroup>
                                 <Label for="exampleText">What would you like to call this event?</Label>
@@ -183,7 +183,7 @@ export class CreateEvent extends Component {
                                 />
                             </FormGroup>
                             <FormGroup>
-                                <Label for="exampleDate">When is the Event?</Label>
+                                <Label for="exampleDate">When is the event?</Label>
                                 <Input
                                     type="date"
                                     name="date"

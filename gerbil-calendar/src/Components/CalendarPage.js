@@ -52,7 +52,7 @@ export class CalendarPage extends Component {
       if(!this.props.ifLogIn){
         return(
           <div className="warning">
-              <div className="warning-message gerbil-text-1">You haven't log-in yet! Click "Sign In" on the top right to let Gerbil know who you are!</div>
+              <div className="warning-message gerbil-text-1">You haven't logged in yet! Click "Sign In" on the top right to let Gerbil know who you are!</div>
           </div>
         );
       }
@@ -89,14 +89,14 @@ export class CalendarPage extends Component {
           />
           
           <div className="gerbilNote"> 
-            <div className="button">
-              Coming Up Next Week
+            <div id="addNote">
+              <h2>Coming Up Next Week</h2>
+              <div id="noteButton">
+                <AddNote addNote={this.addNote}/>
+                {this.state.noteInput}
+              </div>
             </div>
-              <AddNote addNote={this.addNote}/>
-            <div>
-              {this.state.noteInput}
-            </div>
-            <div>
+            <div id="task">
               <CreateTask 
                 user={this.props.user}/>
               <ShowTask 
