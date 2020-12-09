@@ -174,8 +174,6 @@ export class GiftGalleryPage extends Component {
             <div id="gift-gallery-Page">
                 <div className="intro-message">
                     <p className="gerbil-text-1">Now you and Gerbil are good friends. Gerbil will never forget you. Hangout with Gerbil more and he will send you secret surprises!!</p>
-                    <Button className="test" outline color="warning" onClick={this.logIn}> sign in + </Button>
-                    <p>Event: {this.state.user.event}  Sign In: {this.state.user.logIn}</p>
                 </div>                
                 <div className="gifts">
                     {gerbilGifts}

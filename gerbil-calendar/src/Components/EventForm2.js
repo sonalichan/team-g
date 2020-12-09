@@ -80,7 +80,6 @@ export class CreateEvent extends Component {
     addNewEvent = () => {
         this.setState({
             newEvent: {
-
                 ...this.state.newEvent,
                 date: this.state.newEvent.date,
                 title: this.state.newEvent.title,
@@ -160,29 +159,26 @@ export class CreateEvent extends Component {
     render() {
         return (
             <div>
-                <Button color="danger" onClick={this.toggle}>+ Add A Schedule</Button>
+                <Button color="danger" onClick={this.toggle}>+ Add a Schedule</Button>
                 <Modal isOpen={this.state.modal} toggle={this.toggle}>
-                    <ModalHeader toggle={this.toggle}>Create Event</ModalHeader>
+                    <ModalHeader toggle={this.toggle}>Tell me more about the Event!</ModalHeader>
                     <ModalBody>
                         <Form>
-                            <div>
-                                <h1>Tell me more about the Event!</h1>
-                            </div>
                             <FormGroup>
-                                <Label for="exampleText">What would you like to call this event?</Label>
+                                <Label for="eventName">What would you like to call this event?</Label>
                                 <Input
                                     type="textarea"
                                     name="text"
-                                    id="exampleText"
+                                    id="eventName"
                                     onChange={this.addTitle}
                                 />
                             </FormGroup>
                             <FormGroup>
-                                <Label for="exampleDate">When is the event?</Label>
+                                <Label for="date">When is the event?</Label>
                                 <Input
                                     type="date"
                                     name="date"
-                                    id="exampleDate"
+                                    id="date"
                                     placeholder="date placeholder"
                                     onChange={this.addDate}
                                 />
@@ -208,11 +204,11 @@ export class CreateEvent extends Component {
                                 />
                             </FormGroup>
                             <FormGroup>
-                                <Label for="exampleText">What is the Event About?</Label>
+                                <Label for="description">What is the Event About? (Optional)</Label>
                                 <Input
                                     type="textarea"
                                     name="text"
-                                    id="exampleText"
+                                    id="description"
                                     onChange={this.addDescription}
                                 />
                             </FormGroup>
@@ -220,16 +216,17 @@ export class CreateEvent extends Component {
                     </ModalBody>
                     <ModalFooter>
                         <Button 
-                            color="primary" 
-                            onClick={this.addNewEvent}
-                            disabled={ !this.state.newEvent.title || !this.state.newEvent.date || !this.state.newEvent.start || !this.state.newEvent.end || !this.state.newEvent.description }>
-                                Create Event
-                        </Button>{' '}
-                        <Button 
                             color="secondary" 
                             onClick={this.cancelEventCreation}>
                                 Cancel
                         </Button>
+                        <Button 
+                            color="primary" 
+                            onClick={this.addNewEvent}
+                            disabled={ !this.state.newEvent.title || !this.state.newEvent.date || !this.state.newEvent.start || !this.state.newEvent.end || !this.state.newEvent.description}>
+                                Add to schedule
+                        </Button>{' '}
+                        
                     </ModalFooter>
                 </Modal>
             </div>
@@ -282,13 +279,10 @@ export class CreateTask extends Component {
                 ...this.state.newTask,
 
                 task: this.state.newTask.task,
-                date: this.state.newTask.date
+                date: this.state.newTask.date ? this.state.newTask.date : ""
             }
         },
             () => {
-                // console.log(this.state.newTask);
-                // console.log(firebase.database().ref('users/' + this.props.user.uid));
-
                 let newTaskKey = firebase.database().ref('users/' + this.props.user.uid).child('tasks').push().key;
                 let updates = {};
 
@@ -302,12 +296,11 @@ export class CreateTask extends Component {
     render() {
         return (
             <div>
-                <Button color="danger" onClick={this.toggle}>+ Add a Task</Button>
+                <Button color="danger" onClick={this.toggle}>Add a Task</Button>
                 <Modal isOpen={this.state.modal} toggle={this.toggle}>
-                    <ModalHeader toggle={this.toggle}>MAKE TASK</ModalHeader>
+                    <ModalHeader toggle={this.toggle}>Add a task</ModalHeader>
                     <ModalBody>
                         <Form>
-                            <div><h1>Coming Up Next Week</h1></div>
                             <FormGroup>
                                 <Label for="exampleText">What is coming up next week?</Label>
                                 <Input
@@ -331,15 +324,17 @@ export class CreateTask extends Component {
                     </ModalBody>
                     <ModalFooter>
                         <Button
+                            className="action-button"
+                            color="secondary"
+                            onClick={this.cancelCreateTask}>
+                            Cancel
+                        </Button>
+                        <Button
+                            className="action-button"
                             color="primary"
                             onClick={this.addNewTask}
                             disabled={ !this.state.newTask.task }>
                             Add Task
-                        </Button>
-                        <Button
-                            color="secondary"
-                            onClick={this.cancelCreateTask}>
-                            Cancel
                         </Button>
                     </ModalFooter>
                 </Modal>
@@ -368,11 +363,16 @@ export class ShowTask extends Component {
 
         let renderedTask = this.props.userData.tasks;
         renderedTask = renderedTask.map((task) => {
-            let text = "DUE " + task.date + " ：" + task.task;
+            let text = "";
+            if (!task.date) {
+                text = task.task;
+            } else {
+                text = "DUE " + task.date + " ：" + task.task;
+            }
             return <li>{text}</li>;
         })
         return (
-            <div>
+            <div id="task-list">
                 <ul>
                     {renderedTask}
                 </ul>

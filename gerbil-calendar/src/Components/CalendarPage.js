@@ -78,35 +78,28 @@ export class CalendarPage extends Component {
             allDaySlot={false}
             slotMinTime="7:00:00"
             slotMaxTime="24:00:00"
-            slotEventOverlap={false}
             height="auto"
-            eventClick={
-              function(){
-                <CreateEvent 
-                  user={this.props.user} userData={this.props.userData} closeModal={this.closeModal} showGiftModal={this.props.showGiftModal}/>
-              }
-            } 
           />
           
-          <div className="gerbilNote"> 
-            <div id="addNote">
+          <div id="task-note-section"> 
+            <div id="task-section">
               <h2>Coming Up Next Week</h2>
-              <div id="noteButton">
-                <AddNote addNote={this.addNote}/>
-                {this.state.noteInput}
-              </div>
-            </div>
-            
-            <div id="task">
               <CreateTask 
                 user={this.props.user}/>
               <ShowTask 
                 userData={this.props.userData}
               />
             </div>
-            
-            <div className="gerbil-img">
-              <img src="/img/gerbil-image.png" alt="a gerbil's picture" />
+
+            <div id="note-section">
+              <h2>A note</h2>
+              <AddNote addNote={this.addNote}/>
+              <div id="notes">
+                {this.state.noteInput}
+              </div>
+              <div className="gerbil-img">
+                <img src="/img/gerbil-image.png" alt="a gerbil's picture" />
+              </div>
             </div>
           </div>
         </div>

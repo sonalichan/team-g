@@ -23,15 +23,57 @@ html, body, #root {
 /** Reactstrap css **/
 .modal-dialog {
     position: absolute !important;
-    width: 60vw !important;
+    width: 50vw !important;
     height: 60vh !important;
     max-width: 60vw !important;
     max-height: 60vh !important;
-    margin: 15vh 20vw !important;
+    margin: 10vh 25vw 0vh 25vw!important;
 }
 
 .modal-header {
     margin: 25px 5% 0px 5% !important;
+}
+
+.modal-header .modal-title {
+    font-family: Mali;
+    font-size: 30px;
+    line-height: 39px;
+
+}
+
+.modal-body {
+    margin: 0px 5% !important;
+}
+
+.modal-body .form-group {
+    margin-bottom: 32px;
+}
+
+.modal-body label, .modal-footer button {
+    font-family: Mali;
+    font-size: 20px;
+    line-height: 26px;
+}
+
+.modal-body input {
+    font-family: Mali;
+    font-size: 15px;
+    line-height: 20px;
+}
+
+.modal-footer {
+    margin: 0px 5% 25px 5% !important;
+}
+
+.modal-footer button, .modal-footer button:hover {
+    padding: 15px 20px;
+    border: none;
+    outline: none !important;
+    outline-offset: none !important;
+}
+
+.modal-footer button:nth-of-type(2) {
+    background-color: #CBBAB3;
 }
 
 .modal-content {
@@ -285,4 +327,51 @@ a.dropdown-item:hover {
 
 .warning .warning-message {
     line-height: 60px;
+}
+
+
+/* task-note-section */
+#task-note-section {
+    margin: 2vh 2vw 10vh 2vw;
+    position: relative;
+}
+
+#task-note-section h2, #task-note-section button, #noteButton, #task-note-section h2, #task-note-section #note-section div:nth-of-type(1), #task-note-section #task-section div:nth-of-type(1)  {
+    display: inline-block;
+    margin-bottom: 5px;
+}
+
+
+#task-note-section #task-section, #task-note-section #note-section{
+    width: 47vw;
+    height: 20vh;
+    margin-bottom: 5vh;
+    display: block;
+    position: absolute;
+    top: 0;
+}
+
+#task-note-section #task-section {
+    left:0;
+}
+
+#task-note-section #note-section {
+    right: 0;
+
+}
+
+#task-note-section #note-section .gerbil-img img {
+    width: 5%;
+    position: fixed;
+    right: 0;
+    bottom: 0px;
+    z-index:20;
+}
+
+#task-note-section #task-section #task-list, #note-section #notes {
+    padding: 15px 25px;
+    background-color: #D0C6BA;
+    height: 25vh;
+    overflow-y: auto;
+
 }
