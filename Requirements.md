@@ -46,6 +46,7 @@
 
 ### **RQ-C-5**: Created events must be visible on the calendar once the user adds the event onto the calendar 
 #### Revised and Complete
+#### We revised this to lift a lot of requirements we couldn't meet- for many of these, we didn't have time to correct them or were unable to find ways to implement events the way we wanted while working with the FullCalendar API. Just leaving the base requirement to have an event appear is enough for minimum functionality. Everything else that came afterwards (such as removing events) was optional.
 - Events on the calendar must include the title. Description will not be shown
 
 ---
@@ -61,6 +62,7 @@
 
 ### Add Notes Function 
 #### Revised and Complete
+#### We revised this requirement because, as with previous requirements, there wasn't enough time to implement all of the features we wanted (such as removing individual Tasks and replacing them)- those extra requirements were considered optional. 
 - A modal will pop up that consists of an input box for letting the user input their notes.
 
 ## **Reward System**
@@ -83,10 +85,11 @@
 
 ### **RQ-RS-4**: Users must not be able to see the requirements for awarded items that we choose to keep as a secret. 
 #### Revised and Incomplete
+#### We revised the wording for parts of this to make the nature of viewing a "secret" reward easier to understand. This feature is incomplete and not all of it's functionality has been implemented yet.
 
 - Will be shown on the bottom row of awards
 - The user will be unable to view requirements for ‘secret’ rewards
-    - They will be greyed out until displayed requirements are met
+    - They will be greyed out (REVISED: unable to be selected) until displayed requirements are met
 
 ### **RQ-RS-5**: Users must not be able to access rewards until requirements have been met 
 #### Complete
