@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Modal, ModalHeader, ModalBody, Button } from 'reactstrap';
+import { Button } from 'reactstrap';
 
 
 export class GiftGalleryPage extends Component {
@@ -7,8 +7,6 @@ export class GiftGalleryPage extends Component {
         super(props);
 
         this.state = {
-            modal: false,
-            giftObtained: {},
             user: {
                 event: 0,
                 logIn: 0, 
@@ -62,16 +60,16 @@ export class GiftGalleryPage extends Component {
                         id: 6,
                         giftName: "Australia",
                         url: "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/close-up-of-tulips-blooming-in-field-royalty-free-image-1584131616.jpg?crop=1.00xw:0.798xh;0,0.202xh&resize=980:*",
-                        requirementText: "log-in 1 time",
+                        requirementText: "Secret",
                         req: "log-in",
-                        reqNum: 1,
+                        reqNum: 2,
                         earned: false
                     },
                     {
                         id: 7,
                         giftName: "India",
                         url: "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/close-up-of-tulips-blooming-in-field-royalty-free-image-1584131616.jpg?crop=1.00xw:0.798xh;0,0.202xh&resize=980:*",
-                        requirementText: "log-in 5 times",
+                        requirementText: "Secret",
                         req: "log-in",
                         reqNum: 5,
                         earned: false
@@ -80,7 +78,7 @@ export class GiftGalleryPage extends Component {
                         id: 8,
                         giftName: "Vietnam",
                         url: "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/close-up-of-tulips-blooming-in-field-royalty-free-image-1584131616.jpg?crop=1.00xw:0.798xh;0,0.202xh&resize=980:*",
-                        requirementText: "log-in 10 times",
+                        requirementText: "Secret",
                         req: "log-in",
                         reqNum: 10,
                         earned: false
@@ -89,7 +87,7 @@ export class GiftGalleryPage extends Component {
                         id: 9,
                         giftName: "New Zealand",
                         url: "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/close-up-of-tulips-blooming-in-field-royalty-free-image-1584131616.jpg?crop=1.00xw:0.798xh;0,0.202xh&resize=980:*",
-                        requirementText: "Log-in 15 times",
+                        requirementText: "Secret",
                         req: "log-in",
                         reqNum: 15,
                         earned: false
@@ -98,7 +96,7 @@ export class GiftGalleryPage extends Component {
                         id: 10,
                         giftName: "France",
                         url: "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/close-up-of-tulips-blooming-in-field-royalty-free-image-1584131616.jpg?crop=1.00xw:0.798xh;0,0.202xh&resize=980:*",
-                        requirementText: "Log-in 20 times",
+                        requirementText: "Secret",
                         req: "log-in",
                         reqNum: 20,
                         earned: false
@@ -107,53 +105,12 @@ export class GiftGalleryPage extends Component {
             },
             
         };
-
-        this.closeModal = this.closeModal.bind(this);
     }
 
 
     componentDidMount() {
       window.scrollTo(0, 0);
     }
-
-    
-    // addEvent = () => {
-    //     let gifts = this.props.userData.giftGallery.giftGallery; 
-    //     let numOfEvents = this.props.userData.giftGallery.event + 1;
-    //     let ifGiftObtained = false;
-    //     let giftObtained = {};
-    //     gifts = gifts.map((gift) => {
-    //         // if gift is already earned, do nothing
-    //         if (gift.earned) {
-    //             return gift;
-    //         }
-
-    //         // if gift's requirement is not event-related, do nothing
-    //         if (gift.req !== "event") {
-    //             return gift;
-    //         }
-
-    //         // if gift's requirement num is not reached, do nothing
-    //         if (numOfEvents < gift.reqNum) {
-    //             return gift;
-    //         } 
-
-    //         gift.earned = true;
-    //         ifGiftObtained = true;
-    //         giftObtained = gift;
-    //         return gift;
-    //     });
-
-    //     this.setState({
-    //         modal: ifGiftObtained,
-    //         giftObtained: giftObtained,
-    //         user: {
-    //             ...this.state.user,
-    //             event: numOfEvents,
-    //             giftGallery: gifts
-    //         }
-    //     })
-    // }
 
     // logIn = () => {
 
@@ -199,14 +156,6 @@ export class GiftGalleryPage extends Component {
     // }
 
   
-    //  close modal
-    closeModal() {
-        this.setState({
-            modal: false
-        });
-    }
-
-
     render() {
         if (!this.props.ifLogIn) {
             return (
@@ -217,31 +166,20 @@ export class GiftGalleryPage extends Component {
         }
 
         let gerbilGifts;
-
-        gerbilGifts = this.props.userData.giftGallery.map((gift) => {
+        gerbilGifts = this.props.userData.giftGallery.giftGallery.map((gift) => {
             return <GiftCard key={gift.id} data={gift} />;
         })
-
-        let renderModal;
-        if (this.state.modal) {
-            renderModal = <RenderModal gift={this.state.giftObtained} closeModal={this.closeModal} modal={this.state.modal}/>;
-        } else {
-            renderModal = "";
-        }
-
 
         return (
             <div id="gift-gallery-Page">
                 <div className="intro-message">
                     <p className="gerbil-text-1">Now you and Gerbil are good friends. Gerbil will never forget you. Hangout with Gerbil more and he will send you secret surprises!!</p>
-                    <Button className="test" outline color="info" onClick={this.addEvent}> event + </Button>
                     <Button className="test" outline color="warning" onClick={this.logIn}> sign in + </Button>
                     <p>Event: {this.state.user.event}  Sign In: {this.state.user.logIn}</p>
                 </div>                
                 <div className="gifts">
                     {gerbilGifts}
                 </div>
-                {renderModal}
             </div>
         );
     }
@@ -266,21 +204,3 @@ class GiftCard extends Component {
     }
 }
 
-
-class RenderModal extends Component {
-    render() {
-        let giftObtained = this.props.gift;
-        return (
-            <Modal isOpen={this.props.modal} toggle={this.props.closeModal}>
-                <ModalHeader toggle={this.props.closeModal} className="gerbil-text-1">Gerbil's secret gift</ModalHeader>
-                <ModalBody>
-                    <p className="gerbil-gift-message gerbil-text-1">Thanks for telling me all of your story! Here is a secret gift!!! Hope you like it!</p>
-                    <div className="gerbil-gift">
-                        <img alt="Gerbil's Gift" src={giftObtained.url} />
-                    </div>
-                    <div className="gerbil-gift-name gerbil-text-1">{giftObtained.giftName}</div>
-                </ModalBody>
-            </Modal>
-        );
-    }
-}

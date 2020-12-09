@@ -87,10 +87,22 @@ export class CreateEvent extends Component {
                 end: this.state.newEvent.date + "T" + this.state.newEvent.end + ":00",
                 description: this.state.newEvent.description
             }
-        },
-            () => {
-                console.log(this.state.newEvent);
-                console.log(firebase.database().ref('users/' + this.props.user.uid));
+        }, () => {
+            console.log(this.state.newEvent);
+            console.log(firebase.database().ref('users/' + this.props.user.uid));
+
+            let newEventKey = firebase.database().ref('users/' + this.props.user.uid).child('events').push().key;
+            let updates = {};
+            
+            // push a newly created event to firebase
+            updates['/users/' + this.props.user.uid + '/events/' +  newEventKey] = this.state.newEvent;
+            
+            // update gift gallery
+            let updatedGiftGallery = this.findEventGift();
+            let ifGiftObtained = false;
+            if (updatedGiftGallery.modal) {
+                ifGiftObtained = true;
+            }
 
                 let newEventKey = firebase.database().ref('users/' + this.props.user.uid).child('events').push().key;
                 let updates = {};
@@ -100,8 +112,35 @@ export class CreateEvent extends Component {
                 firebase.database().ref().update(updates);
                 this.setState({ modal: false, newEvent: {} })
             }
-        )
+
+            // if gift's requirement is not event-related, do nothing
+            if (gift.req !== "event") {
+                return gift;
+            }
+
+            // if gift's requirement num is not reached, do nothing
+            if (numOfEvents < gift.reqNum) {
+                return gift;
+            } 
+
+            gift.earned = true;
+            ifGiftObtained = true;
+            giftObtained = gift;
+            return gift;
+        });
+
+        let returned = {
+            "modal": ifGiftObtained,
+            "giftObtained": giftObtained,
+            "user": {
+                "event": numOfEvents,
+                "giftGallery": gifts
+            }
+        }
+
+        return returned;
     }
+
 
     render() {
         return (
@@ -317,23 +356,3 @@ export class ShowTask extends Component {
         );
     }
 } 
-
-
-/*
-                        <div>{this.props.user.tasks.task}</div>
-                        <div>{this.props.user.tasks.date}</div> 
-
-*/
-
-/* 
-                <Toast>
-                    <ToastHeader>
-                        Coming Up Next Week
-                </ToastHeader>
-                    <ToastBody>
-                        <div>This textbox will display the user's Task from the Add a Note button (CreateTask)!
-                        And the date</div>
-                 </ToastBody>
-                </Toast>
-
-*/

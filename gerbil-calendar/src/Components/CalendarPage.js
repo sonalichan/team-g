@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { Col, Row, Card, CardImg, Form, FormGroup, FormText, Label, Input } from 'reactstrap';
 import ReactDOM from 'react-dom';
-import { CreateEvent, CreateTask, ShowTask } from "../EventForm2.js";
+import { CreateEvent, CreateTask, ShowTask } from "../Components/EventForm2.js";
 
 import FullCalendar from "@fullcalendar/react";
 import timeGridPlugin from '@fullcalendar/timegrid';
@@ -66,31 +66,23 @@ export class CalendarPage extends Component {
     render() {
       if(!this.props.ifLogIn){
         return(
-          <div></div>
+          <div className="warning">
+              <div className="warning-message gerbil-text-1">You haven't log-in yet! Click "Sign In" on the top right to let Gerbil know who you are!</div>
+          </div>
         );
       }
+
       var events = this.props.userData.events;
 
-      let renderModal;
-      if (this.state.modal) {
-          renderModal = <RenderEventModal modal={this.state.modal} closeModal={this.closeModal}/>;
-      } else {
-          renderModal = "";
-      }
       console.log(this.state.noteInput);
 
       return (
-        <div>
-            <h1>Hello, {this.props.user.displayName}</h1>
-            <div className="calendar-button">
-              <Button onClick={this.addEvent} color="primary">+ Add a Schedule</Button>
-              <Button onClick={() => window.print()} color="secondary">&#x1f5b6; Print</Button>
-            </div>
-          {renderModal}
-          <div id="buttons" align="right">
+        <div id="calendarPage">
+          <h1>Hello, {this.props.user.displayName}</h1>
+          <div className="calendar-button" align="right">
             <CreateEvent 
-              user={this.props.user}/>
-            <Button color="secondary">&#x1f5b6;</Button>
+              user={this.props.user} userData={this.props.userData} closeModal={this.closeModal} showGiftModal={this.props.showGiftModal}/>
+            <Button onClick={() => window.print()} color="secondary">&#x1f5b6; Print</Button>
           </div>
           
           
@@ -98,10 +90,14 @@ export class CalendarPage extends Component {
             defaultView="dayGridMonth"
             plugins={[timeGridPlugin]}
             events={events}
+            allDaySlot={false}
+            slotMinTime="7:00:00"
+            slotMaxTime="24:00:00"
+            height="auto"
             eventClick={
               function(){
                 <CreateEvent 
-                  user={this.props.user}/>
+                  user={this.props.user} userData={this.props.userData} closeModal={this.closeModal} showGiftModal={this.props.showGiftModal}/>
               }
             } 
           />
@@ -129,30 +125,6 @@ export class CalendarPage extends Component {
       );
     }}
 
-
-class RenderEventModal extends Component {
-  constructor(props) {
-      super(props);
-      this.state = {
-          newEvent: {}
-      };
-  }
-  
-
-  render() {
-    return (
-      <div>
-        <Modal isOpen={this.props.modal} toggle={this.props.closeModal}>
-            <ModalHeader toggle={this.props.closeModal} className="gerbil-text-1">Add Event Modal</ModalHeader>
-            <ModalBody>
-                
-            </ModalBody>
-          </Modal>
-      </div>
-    );
-  }
-
-}
 
   const rootElement = document.getElementById("root");
   ReactDOM.render(<CalendarPage />, rootElement);
