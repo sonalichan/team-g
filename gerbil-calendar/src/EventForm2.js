@@ -112,7 +112,7 @@ export class CreateEvent extends Component {
                     <ModalBody>
                         <Form>
                             <div>
-                                <h1>"Tell me more about the Event!" / custom x button</h1>
+                                <h1>"Tell me more about the Event!"</h1>
                             </div>
                             <FormGroup>
                                 <Label for="exampleText">What would you like to call this event?</Label>
@@ -223,8 +223,8 @@ export class CreateTask extends Component {
             }
         },
             () => {
-                console.log(this.state.newTask);
-                console.log(firebase.database().ref('users/' + this.props.user.uid)); // HELP: TypeError: Cannot read property 'uid' of undefined
+                // console.log(this.state.newTask);
+                // console.log(firebase.database().ref('users/' + this.props.user.uid));
 
                 let newTaskKey = firebase.database().ref('users/' + this.props.user.uid).child('tasks').push().key;
                 let updates = {};
@@ -256,7 +256,7 @@ export class CreateTask extends Component {
                                 />
                             </FormGroup>
                             <FormGroup>
-                                <Label for="exampleDate">When is this Happening (MM/DD/YY)? Optional.</Label>
+                                <Label for="exampleDate">When is this due (MM/DD/YY)? Optional.</Label>
                                 <Input
                                     type="date"
                                     name="date"
@@ -285,26 +285,55 @@ export class CreateTask extends Component {
     }
 }
 
-/* allow person to click on event to view it, and exit viewing or delete.
-DIFFERENT THAN MODAL TO CREATE EVENT */
+export class ShowTask extends Component {   
+    constructor(props) {
+        super(props);
+        this.state = {
+            modal: false,
+            newTask: []
+        };
+    }
+  
+      componentDidMount() {
+        window.scrollTo(0, 0);
+      }
 
-export class ViewEvent extends Component {
-}
 
-export class ShowTask extends Component {
     render() {
+        console.log();
+
+
+        let renderedTask = this.props.userData.tasks;
+        renderedTask = renderedTask.map((task) => {
+            let text = "DUE " + task.date + " ：" + task.task;
+            return <li>{text}</li>;
+        })
         return (
             <div>
+                <ul>
+                    {renderedTask}
+                </ul>
+            </div>
+        );
+    }
+} 
+
+
+/*
+                        <div>{this.props.user.tasks.task}</div>
+                        <div>{this.props.user.tasks.date}</div> 
+
+*/
+
+/* 
                 <Toast>
                     <ToastHeader>
                         Coming Up Next Week
                 </ToastHeader>
                     <ToastBody>
-                        This textbox will display the user's Task from the Add a Note button (CreateTask)!
-                        And the date
+                        <div>This textbox will display the user's Task from the Add a Note button (CreateTask)!
+                        And the date</div>
                  </ToastBody>
                 </Toast>
-            </div>
-        );
-    }
-} 
+
+*/

@@ -196,6 +196,15 @@ class App extends Component {
                 })
               }
 
+              let dbTasks = [];
+              let tasksKey = [];
+              if (value.tasks !== undefined & value.tasks !== null) {
+                tasksKey = Object.keys(value.tasks);
+                dbTasks = tasksKey.map((item) => {
+                  return value.tasks[item];
+                })
+              }
+
               console.log(eventsKey);
               console.log(dbEvents);
               // updates saved info from database to state
@@ -204,9 +213,9 @@ class App extends Component {
                   ...prevState.firebaseData,
                   events: dbEvents,
                   eventsKey: eventsKey,
-                  giftGallery: value.giftGallery
-                  // tasks: dbTasks,
-                  // tasksKey: tasksKey
+                  giftGallery: value.giftGallery,
+                  tasks: dbTasks,
+                  tasksKey: tasksKey
                 }
               }));
             }

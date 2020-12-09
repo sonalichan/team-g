@@ -117,7 +117,9 @@ export class CalendarPage extends Component {
             <div>
               <CreateTask 
                 user={this.props.user}/>
-              <ShowTask />
+              <ShowTask 
+                userData={this.props.userData}
+              />
             </div>
             <div className="gerbil-img">
               <img src="/img/gerbil-image.png" alt="a gerbil's picture" />
