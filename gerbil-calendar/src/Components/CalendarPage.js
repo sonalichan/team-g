@@ -12,20 +12,6 @@ import 'bootstrap/dist/css/bootstrap.css';
 import AddNote from './AddANote';
 
 
-/*
-TUTORIAL:
-https://www.newline.co/@dmitryrogozhny/how-to-add-month,-week,-or-day-calendar-in-react-with-fullcalendar--7e10e8cf 
-
-API documentation (add event, remove event, start event time etc):
-https://fullcalendar.io/docs
-
-*/
-
-// replace with bringing up popup window later
-
-/* 
-TO DO: add the "add a note" text section
-*/
 export class CalendarPage extends Component {
 
     constructor(props) {
@@ -62,12 +48,11 @@ export class CalendarPage extends Component {
       });
     }
 
-    
     render() {
       if(!this.props.ifLogIn){
         return(
           <div className="warning">
-              <div className="warning-message gerbil-text-1">You haven't log-in yet! Click "Sign In" on the top right to let Gerbil know who you are!</div>
+              <div className="warning-message gerbil-text-1">You haven't logged in yet! Click "Sign In" on the top right to let Gerbil know who you are!</div>
           </div>
         );
       }
@@ -93,6 +78,7 @@ export class CalendarPage extends Component {
             allDaySlot={false}
             slotMinTime="7:00:00"
             slotMaxTime="24:00:00"
+            slotEventOverlap={false}
             height="auto"
             eventClick={
               function(){
@@ -103,27 +89,30 @@ export class CalendarPage extends Component {
           />
           
           <div className="gerbilNote"> 
-            <div className="button">
-              Coming Up Next Week
+            <div id="addNote">
+              <h2>Coming Up Next Week</h2>
+              <div id="noteButton">
+                <AddNote addNote={this.addNote}/>
+                {this.state.noteInput}
+              </div>
             </div>
-              <AddNote addNote={this.addNote}/>
-            <div>
-              {this.state.noteInput}
-            </div>
-            <div>
+            
+            <div id="task">
               <CreateTask 
                 user={this.props.user}/>
               <ShowTask 
                 userData={this.props.userData}
               />
             </div>
+            
             <div className="gerbil-img">
               <img src="/img/gerbil-image.png" alt="a gerbil's picture" />
             </div>
           </div>
         </div>
       );
-    }}
+    }
+  }
 
 
   const rootElement = document.getElementById("root");

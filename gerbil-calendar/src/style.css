@@ -98,7 +98,7 @@ a.dropdown-item:hover {
     position: relative;
 }
 
-#calendarPage h1, #calendarPage h2 {
+#calendarPage h1, #calendarPage h2, #noteTitle h1 {
     text-align: left;
     font-family: Mali;
     font-weight: 400;
@@ -111,7 +111,7 @@ a.dropdown-item:hover {
 
 }
 
-#calendarPage h2 {
+#calendarPage h2, #noteTitle h1 {
     margin-left: 0vw;
 
     font-weight: 400;
@@ -143,6 +143,21 @@ a.dropdown-item:hover {
 
 #calendarPage .gerbil-img img{
     width:250px;
+}
+
+#addNote {
+    display: inline-block;
+    position: static;
+    margin-left: 30px;
+    width: 40%;
+    margin-block-end: 20px;
+    overflow-wrap: break-word;
+}
+
+#task {
+    display: inline-block;
+    position: relative;
+    top: 23px;
 }
 
 

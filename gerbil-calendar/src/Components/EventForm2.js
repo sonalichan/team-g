@@ -1,6 +1,7 @@
 import React, { useState, Component } from 'react';
 import { Row, Col, Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 import { Modal, ModalHeader, ModalBody, ModalFooter, Toast, ToastHeader, ToastBody } from 'reactstrap';
+//import { AvForm, AvField } from 'availity-reactstrap-validation';
 
 import firebase from 'firebase/app';
 import { render } from 'react-dom';
@@ -156,17 +157,16 @@ export class CreateEvent extends Component {
         return returned;
     }
 
-
     render() {
         return (
             <div>
                 <Button color="danger" onClick={this.toggle}>+ Add A Schedule</Button>
                 <Modal isOpen={this.state.modal} toggle={this.toggle}>
-                    <ModalHeader toggle={this.toggle}>Modal title</ModalHeader>
+                    <ModalHeader toggle={this.toggle}>Create Event</ModalHeader>
                     <ModalBody>
                         <Form>
                             <div>
-                                <h1>"Tell me more about the Event!"</h1>
+                                <h1>Tell me more about the Event!</h1>
                             </div>
                             <FormGroup>
                                 <Label for="exampleText">What would you like to call this event?</Label>
@@ -178,7 +178,7 @@ export class CreateEvent extends Component {
                                 />
                             </FormGroup>
                             <FormGroup>
-                                <Label for="exampleDate">When is the Event?</Label>
+                                <Label for="exampleDate">When is the event?</Label>
                                 <Input
                                     type="date"
                                     name="date"
@@ -219,8 +219,17 @@ export class CreateEvent extends Component {
                         </Form>
                     </ModalBody>
                     <ModalFooter>
-                        <Button color="primary" onClick={this.addNewEvent}>Create Event</Button>{' '}
-                        <Button color="secondary" onClick={this.cancelEventCreation}>Cancel</Button>
+                        <Button 
+                            color="primary" 
+                            onClick={this.addNewEvent}
+                            disabled={ !this.state.newEvent.title || !this.state.newEvent.date || !this.state.newEvent.start || !this.state.newEvent.end || !this.state.newEvent.description }>
+                                Create Event
+                        </Button>{' '}
+                        <Button 
+                            color="secondary" 
+                            onClick={this.cancelEventCreation}>
+                                Cancel
+                        </Button>
                     </ModalFooter>
                 </Modal>
             </div>
@@ -283,7 +292,6 @@ export class CreateTask extends Component {
                 let newTaskKey = firebase.database().ref('users/' + this.props.user.uid).child('tasks').push().key;
                 let updates = {};
 
-                // push newly created Task  to firebase
                 updates['/users/' + this.props.user.uid + '/tasks/' + newTaskKey] = this.state.newTask;
                 firebase.database().ref().update(updates);
                 this.setState({ modal: false, newTask: {} })
@@ -294,7 +302,7 @@ export class CreateTask extends Component {
     render() {
         return (
             <div>
-                <Button color="danger" onClick={this.toggle}>+ Add a Note</Button>
+                <Button color="danger" onClick={this.toggle}>+ Add a Task</Button>
                 <Modal isOpen={this.state.modal} toggle={this.toggle}>
                     <ModalHeader toggle={this.toggle}>MAKE TASK</ModalHeader>
                     <ModalBody>
@@ -324,7 +332,8 @@ export class CreateTask extends Component {
                     <ModalFooter>
                         <Button
                             color="primary"
-                            onClick={this.addNewTask}>
+                            onClick={this.addNewTask}
+                            disabled={ !this.state.newTask.task }>
                             Add Task
                         </Button>
                         <Button

@@ -3,3 +3,7 @@
     width: 50%;
     box-align: "right";
   }
+
+  #calendarPage {
+    -webkit-print-color-adjust: exact !important;
+  }

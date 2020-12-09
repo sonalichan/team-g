@@ -160,7 +160,7 @@ export class GiftGalleryPage extends Component {
         if (!this.props.ifLogIn) {
             return (
                 <div className="warning">
-                    <div className="warning-message gerbil-text-1">You haven't log-in yet! Click "Sign In" on the top right to let Gerbil know who you are!</div>
+                    <div className="warning-message gerbil-text-1">You haven't logged in yet! Click "Sign In" on the top right to let Gerbil know who you are!</div>
                 </div>
             );
         }
