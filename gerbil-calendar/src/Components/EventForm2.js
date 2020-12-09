@@ -108,7 +108,6 @@ export class CreateEvent extends Component {
                 updates['/users/' + this.props.user.uid + '/events/' + newEventKey] = this.state.newEvent;
                 firebase.database().ref().update(updates);
                 this.setState({ modal: false, newEvent: {} })
-            }
 
             // if gift's requirement is not event-related, do nothing
             if (gift.req !== "event") {
