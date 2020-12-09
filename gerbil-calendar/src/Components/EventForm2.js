@@ -1,6 +1,7 @@
 import React, { useState, Component } from 'react';
 import { Row, Col, Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 import { Modal, ModalHeader, ModalBody, ModalFooter, Toast, ToastHeader, ToastBody } from 'reactstrap';
+import { AvForm, AvField } from 'availity-reactstrap-validation';
 
 import firebase from 'firebase/app';
 import { render } from 'react-dom';
@@ -118,14 +119,6 @@ export class CreateEvent extends Component {
                     this.props.showGiftModal(updatedGiftGallery.giftObtained);
                 }
             });
-
-            /* 
-            let newEventKey = firebase.database().ref().child('posts').push().key;
-            let updates = {};
-            // push a newly created event to firebase
-            updates['/allData/events/' + newEventKey] = this.state.newEvent;
-            firebase.database().ref().update(updates);
-            this.setState({ modal: false, newEvent: {} }) */
         });
     }
 
@@ -168,7 +161,6 @@ export class CreateEvent extends Component {
 
         return returned;
     }
-
 
     render() {
         return (
@@ -232,8 +224,17 @@ export class CreateEvent extends Component {
                         </Form>
                     </ModalBody>
                     <ModalFooter>
-                        <Button color="primary" onClick={this.addNewEvent}>Create Event</Button>{' '}
-                        <Button color="secondary" onClick={this.cancelEventCreation}>Cancel</Button>
+                        <Button 
+                            color="primary" 
+                            onClick={this.addNewEvent}
+                            disabled={ !this.state.newEvent.title || !this.state.newEvent.date || !this.state.newEvent.start || !this.state.newEvent.end || !this.state.newEvent.description }>
+                                Create Event
+                        </Button>{' '}
+                        <Button 
+                            color="secondary" 
+                            onClick={this.cancelEventCreation}>
+                                Cancel
+                        </Button>
                     </ModalFooter>
                 </Modal>
             </div>
@@ -296,7 +297,6 @@ export class CreateTask extends Component {
                 let newTaskKey = firebase.database().ref('users/' + this.props.user.uid).child('tasks').push().key;
                 let updates = {};
 
-                // push newly created Task  to firebase
                 updates['/users/' + this.props.user.uid + '/tasks/' + newTaskKey] = this.state.newTask;
                 firebase.database().ref().update(updates);
                 this.setState({ modal: false, newTask: {} })
@@ -307,7 +307,7 @@ export class CreateTask extends Component {
     render() {
         return (
             <div>
-                <Button color="danger" onClick={this.toggle}>+ Add a Note</Button>
+                <Button color="danger" onClick={this.toggle}>+ Add a Task</Button>
                 <Modal isOpen={this.state.modal} toggle={this.toggle}>
                     <ModalHeader toggle={this.toggle}>MAKE TASK</ModalHeader>
                     <ModalBody>
@@ -337,7 +337,8 @@ export class CreateTask extends Component {
                     <ModalFooter>
                         <Button
                             color="primary"
-                            onClick={this.addNewTask}>
+                            onClick={this.addNewTask}
+                            disabled={ !this.state.newTask.task }>
                             Add Task
                         </Button>
                         <Button

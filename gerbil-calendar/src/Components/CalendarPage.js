@@ -12,20 +12,6 @@ import 'bootstrap/dist/css/bootstrap.css';
 import AddNote from './AddANote';
 
 
-/*
-TUTORIAL:
-https://www.newline.co/@dmitryrogozhny/how-to-add-month,-week,-or-day-calendar-in-react-with-fullcalendar--7e10e8cf 
-
-API documentation (add event, remove event, start event time etc):
-https://fullcalendar.io/docs
-
-*/
-
-// replace with bringing up popup window later
-
-/* 
-TO DO: add the "add a note" text section
-*/
 export class CalendarPage extends Component {
 
     constructor(props) {
@@ -62,7 +48,6 @@ export class CalendarPage extends Component {
       });
     }
 
-    
     render() {
       if(!this.props.ifLogIn){
         return(
@@ -93,6 +78,7 @@ export class CalendarPage extends Component {
             allDaySlot={false}
             slotMinTime="7:00:00"
             slotMaxTime="24:00:00"
+            slotEventOverlap={false}
             height="auto"
             eventClick={
               function(){
