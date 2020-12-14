@@ -1,14 +1,71 @@
 import React, { useState, Component } from 'react';
 import { Row, Col, Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 import { Modal, ModalHeader, ModalBody, ModalFooter, Toast, ToastHeader, ToastBody } from 'reactstrap';
+<<<<<<< Updated upstream
 //import { AvForm, AvField } from 'availity-reactstrap-validation';
+=======
+import moment from 'moment';
+import { AvForm, AvField } from 'availity-reactstrap-validation';
+>>>>>>> Stashed changes
 
 import firebase from 'firebase/app';
 import { render } from 'react-dom';
 
 
-/* API documentation (add event, remove event, start event time etc):
+/* API documentation:
 https://fullcalendar.io/docs
+*/
+
+/* the End time of event must NOT precede start time. 
+example: if start time is 7am
+end time can ALSO be 7am or anytime AFTER 7am 
+end time cant be ***BEFORE*** 7am 
+
+ ISO8601 strings:
+        start: this.state.newEvent.date + "T" + this.state.newEvent.start + ":00"
+        end: this.state.newEvent.date + "T" + this.state.newEvent.end + ":00"
+
+ convert string to milliseconds for subtraction:
+        var myDate = new Date("2012-02-10T13:19:11+0000");
+        var result = myDate.getTime();
+        console.log(result);
+
+---
+
+if (moment().minute() - endMinute < 0) {
+    deny event creation
+}
+dont need Else statement: event creation will work like normal otherwise
+
+
+function checkEndTime(){
+var startDate = new Date(start); // PASS IN start: this.state.newEvent.date + "T" + this.state.newEvent.start + ":00"
+var endDate = new Date(start); // PASS IN end: this.state.newEvent.date + "T" + this.state.newEvent.end + ":00"
+
+var startMS = startTime.getTime();
+var endMS = endTime.getTime();
+
+    if( startMS - endMS < 0){ // when
+        return true;
+    }
+}
+
+---
+
+start end
+666 - 667
+
+
+// when checkEndTime is true (aka when end time is set BEFORE start time)
+// button will be disabled until user puts in a correct time
+<Button
+        color="primary" 
+        onClick={this.addNewEvent}
+        disabled={ <checkEndTime /> || !this.state.newEvent.title || !this.state.newEvent.date || !this.state.newEvent.start || !this.state.newEvent.end || !this.state.newEvent.description }>
+        Create Event
+        </Button>{' '}
+
+
 */
 
 export class CreateEvent extends Component {
@@ -94,10 +151,10 @@ export class CreateEvent extends Component {
 
             let newEventKey = firebase.database().ref('users/' + this.props.user.uid).child('events').push().key;
             let updates = {};
-            
+
             // push a newly created event to firebase
-            updates['/users/' + this.props.user.uid + '/events/' +  newEventKey] = this.state.newEvent;
-            
+            updates['/users/' + this.props.user.uid + '/events/' + newEventKey] = this.state.newEvent;
+
             // update gift gallery
             let updatedGiftGallery = this.findEventGift();
             let ifGiftObtained = false;
@@ -112,8 +169,8 @@ export class CreateEvent extends Component {
             updates['/users/' + this.props.user.uid + '/giftGallery/event'] = updatedGiftGallery.user.event;
             updates['/users/' + this.props.user.uid + '/giftGallery/giftGallery'] = updatedGiftGallery.user.giftGallery;
             firebase.database().ref().update(updates);
-            this.setState({ 
-                modal: false, newEvent: {} 
+            this.setState({
+                modal: false, newEvent: {}
             }, () => {
                 if (updatedGiftGallery.modal) {
                     this.props.showGiftModal(updatedGiftGallery.giftObtained);
@@ -122,9 +179,22 @@ export class CreateEvent extends Component {
         });
     }
 
+    checkEndTime = () => {
+        var startDate = new Date(this.state.newEvent.date + "T" + this.state.newEvent.start + ":00"); // ISO8601 format
+        var endDate = new Date(this.state.newEvent.date + "T" + this.state.newEvent.end + ":00"); // ISO8601 format
+
+        var startMS = startDate.getTime(); // convert start ISO8601 string to milliseconds
+        var endMS = endDate.getTime(); // convert end ISO8601 string to milliseconds
+
+        // if negative: user has set 
+        if (startMS - endMS < 0) {
+            return true;
+        }
+    }
+
     findEventGift = () => {
-        console.log(this.props.userData);        
-        let gifts = this.props.userData.giftGallery.giftGallery; 
+        console.log(this.props.userData);
+        let gifts = this.props.userData.giftGallery.giftGallery;
         let numOfEvents = this.props.userData.giftGallery.event + 1;
         let ifGiftObtained = false;
         let giftObtained = {};
@@ -142,7 +212,7 @@ export class CreateEvent extends Component {
             // if gift's requirement num is not reached, do nothing
             if (numOfEvents < gift.reqNum) {
                 return gift;
-            } 
+            }
 
             gift.earned = true;
             ifGiftObtained = true;
@@ -224,16 +294,16 @@ export class CreateEvent extends Component {
                         </Form>
                     </ModalBody>
                     <ModalFooter>
-                        <Button 
-                            color="primary" 
+                        <Button
+                            color="primary"
                             onClick={this.addNewEvent}
-                            disabled={ !this.state.newEvent.title || !this.state.newEvent.date || !this.state.newEvent.start || !this.state.newEvent.end || !this.state.newEvent.description }>
-                                Create Event
+                            disabled={ <this.checkEndTime /> || !this.state.newEvent.title || !this.state.newEvent.date || !this.state.newEvent.start || !this.state.newEvent.end || !this.state.newEvent.description}>
+                            Create Event
                         </Button>{' '}
-                        <Button 
-                            color="secondary" 
+                        <Button
+                            color="secondary"
                             onClick={this.cancelEventCreation}>
-                                Cancel
+                            Cancel
                         </Button>
                     </ModalFooter>
                 </Modal>
@@ -291,8 +361,6 @@ export class CreateTask extends Component {
             }
         },
             () => {
-                // console.log(this.state.newTask);
-                // console.log(firebase.database().ref('users/' + this.props.user.uid));
 
                 let newTaskKey = firebase.database().ref('users/' + this.props.user.uid).child('tasks').push().key;
                 let updates = {};
@@ -338,7 +406,7 @@ export class CreateTask extends Component {
                         <Button
                             color="primary"
                             onClick={this.addNewTask}
-                            disabled={ !this.state.newTask.task }>
+                            disabled={!this.state.newTask.task}>
                             Add Task
                         </Button>
                         <Button
@@ -353,7 +421,7 @@ export class CreateTask extends Component {
     }
 }
 
-export class ShowTask extends Component {   
+export class ShowTask extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -361,10 +429,10 @@ export class ShowTask extends Component {
             newTask: []
         };
     }
-  
-      componentDidMount() {
+
+    componentDidMount() {
         window.scrollTo(0, 0);
-      }
+    }
 
 
     render() {

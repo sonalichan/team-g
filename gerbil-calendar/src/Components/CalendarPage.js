@@ -79,13 +79,7 @@ export class CalendarPage extends Component {
             slotMinTime="7:00:00"
             slotMaxTime="24:00:00"
             slotEventOverlap={false}
-            height="auto"
-            eventClick={
-              function(){
-                <CreateEvent 
-                  user={this.props.user} userData={this.props.userData} closeModal={this.closeModal} showGiftModal={this.props.showGiftModal}/>
-              }
-            } 
+            height="auto" 
           />
           
           <div className="gerbilNote"> 
