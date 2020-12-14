@@ -1,12 +1,8 @@
 import React, { useState, Component } from 'react';
 import { Row, Col, Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 import { Modal, ModalHeader, ModalBody, ModalFooter, Toast, ToastHeader, ToastBody } from 'reactstrap';
-<<<<<<< Updated upstream
-//import { AvForm, AvField } from 'availity-reactstrap-validation';
-=======
-import moment from 'moment';
-import { AvForm, AvField } from 'availity-reactstrap-validation';
->>>>>>> Stashed changes
+// import moment from 'moment';
+// import { AvForm, AvField } from 'availity-reactstrap-validation';
 
 import firebase from 'firebase/app';
 import { render } from 'react-dom';
