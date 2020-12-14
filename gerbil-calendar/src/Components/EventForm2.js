@@ -7,59 +7,6 @@ import { Modal, ModalHeader, ModalBody, ModalFooter, Toast, ToastHeader, ToastBo
 import firebase from 'firebase/app';
 import { render } from 'react-dom';
 
-
-/* API documentation:
-https://fullcalendar.io/docs
-*/
-
-/* the End time of event must NOT precede start time. 
-example: if start time is 7am
-end time can ALSO be 7am or anytime AFTER 7am 
-end time cant be ***BEFORE*** 7am 
-
- ISO8601 strings:
-        start: this.state.newEvent.date + "T" + this.state.newEvent.start + ":00"
-        end: this.state.newEvent.date + "T" + this.state.newEvent.end + ":00"
-
- convert string to milliseconds for subtraction:
-        var myDate = new Date("2012-02-10T13:19:11+0000");
-        var result = myDate.getTime();
-        console.log(result);
-
----
-
-if (moment().minute() - endMinute < 0) {
-    deny event creation
-}
-dont need Else statement: event creation will work like normal otherwise
-
-
-function checkEndTime(){
-var startDate = new Date(start); // PASS IN start: this.state.newEvent.date + "T" + this.state.newEvent.start + ":00"
-var endDate = new Date(start); // PASS IN end: this.state.newEvent.date + "T" + this.state.newEvent.end + ":00"
-
-var startMS = startTime.getTime();
-var endMS = endTime.getTime();
-
-    if( startMS - endMS < 0){ // when
-        return true;
-    }
-}
-
----
-
-// when checkEndTime is true (aka when end time is set BEFORE start time)
-// button will be disabled until user puts in a correct time
-<Button
-        color="primary" 
-        onClick={this.addNewEvent}
-        disabled={ <checkEndTime /> || !this.state.newEvent.title || !this.state.newEvent.date || !this.state.newEvent.start || !this.state.newEvent.end || !this.state.newEvent.description }>
-        Create Event
-        </Button>{' '}
-
-
-*/
-
 export class CreateEvent extends Component {
     constructor(props) {
         super(props);
@@ -171,6 +118,8 @@ export class CreateEvent extends Component {
         });
     }
 
+    // when checkEndTime is true (aka when end time is set BEFORE start time)
+    // button will be disabled until user puts in a correct time
     checkEndTime = () => {
         var startDate = new Date(this.state.newEvent.date + "T" + this.state.newEvent.start + ":00"); // ISO8601 format. example: 2018-06-01T12:30:00
         var endDate = new Date(this.state.newEvent.date + "T" + this.state.newEvent.end + ":00"); // ISO8601 format
@@ -180,18 +129,6 @@ export class CreateEvent extends Component {
         var result = startMS - endMS;
 
         console.log(result);
-
-        /* if positive: user has set end time BEFORE start time
-            start = 9:00am (less milliseconds) 
-            end = 10:00am (more milliseconds) 
-            start - end = NEGATIVE (RESULT WE WANT)
-            the user 
-
-            start = 9:00am (more milliseconds)
-            end = 8:00am on same day (less milliseconds)
-            start - end = POSITIVE (RESULT WE DON'T WANT. BLOCK EVENT CREATION)
-
-        */
 
         if (startMS - endMS > 0) {
             return true;
@@ -239,6 +176,7 @@ export class CreateEvent extends Component {
     }
 
     render() {
+        let endTime = this.checkEndTime();
         return (
             <div>
                 <Button color="danger" onClick={this.toggle}>+ Add A Schedule</Button>
@@ -303,7 +241,7 @@ export class CreateEvent extends Component {
                         <Button
                             color="primary"
                             onClick={this.addNewEvent}
-                            disabled={ <this.checkEndTime /> || !this.state.newEvent.title || !this.state.newEvent.date || !this.state.newEvent.start || !this.state.newEvent.end || !this.state.newEvent.description}>
+                            disabled={ endTime || !this.state.newEvent.title || !this.state.newEvent.date || !this.state.newEvent.start || !this.state.newEvent.end || !this.state.newEvent.description}>
                             Create Event
                         </Button>{' '}
                         <Button
