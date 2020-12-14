@@ -48,10 +48,6 @@ var endMS = endTime.getTime();
 
 ---
 
-start end
-666 - 667
-
-
 // when checkEndTime is true (aka when end time is set BEFORE start time)
 // button will be disabled until user puts in a correct time
 <Button
@@ -176,14 +172,28 @@ export class CreateEvent extends Component {
     }
 
     checkEndTime = () => {
-        var startDate = new Date(this.state.newEvent.date + "T" + this.state.newEvent.start + ":00"); // ISO8601 format
+        var startDate = new Date(this.state.newEvent.date + "T" + this.state.newEvent.start + ":00"); // ISO8601 format. example: 2018-06-01T12:30:00
         var endDate = new Date(this.state.newEvent.date + "T" + this.state.newEvent.end + ":00"); // ISO8601 format
 
         var startMS = startDate.getTime(); // convert start ISO8601 string to milliseconds
         var endMS = endDate.getTime(); // convert end ISO8601 string to milliseconds
+        var result = startMS - endMS;
 
-        // if negative: user has set 
-        if (startMS - endMS < 0) {
+        console.log(result);
+
+        /* if positive: user has set end time BEFORE start time
+            start = 9:00am (less milliseconds) 
+            end = 10:00am (more milliseconds) 
+            start - end = NEGATIVE (RESULT WE WANT)
+            the user 
+
+            start = 9:00am (more milliseconds)
+            end = 8:00am on same day (less milliseconds)
+            start - end = POSITIVE (RESULT WE DON'T WANT. BLOCK EVENT CREATION)
+
+        */
+
+        if (startMS - endMS > 0) {
             return true;
         }
     }
