@@ -65,7 +65,7 @@ html, body, #root {
     margin: 0px 5% 25px 5% !important;
 }
 
-.modal-footer button, .modal-footer button:hover {
+.modal-footer button, .modal-footer button:hover, .modal-footer button:focus {
     padding: 15px 20px;
     border: none;
     outline: none !important;
@@ -74,6 +74,10 @@ html, body, #root {
 
 .modal-footer button:nth-of-type(2) {
     background-color: #CBBAB3;
+}
+
+.modal-footer button:focus {
+    background-color:  #CBBAB3;
 }
 
 .modal-content {

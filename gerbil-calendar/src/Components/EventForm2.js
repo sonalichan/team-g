@@ -1,15 +1,11 @@
 import React, { useState, Component } from 'react';
 import { Row, Col, Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 import { Modal, ModalHeader, ModalBody, ModalFooter, Toast, ToastHeader, ToastBody } from 'reactstrap';
-//import { AvForm, AvField } from 'availity-reactstrap-validation';
+// import moment from 'moment';
+// import { AvForm, AvField } from 'availity-reactstrap-validation';
 
 import firebase from 'firebase/app';
 import { render } from 'react-dom';
-
-
-/* API documentation (add event, remove event, start event time etc):
-https://fullcalendar.io/docs
-*/
 
 export class CreateEvent extends Component {
     constructor(props) {
@@ -105,8 +101,8 @@ export class CreateEvent extends Component {
             updates['/users/' + this.props.user.uid + '/giftGallery/giftGallery'] = updatedGiftGallery.user.giftGallery;
             firebase.database().ref().update(updates);
             
-            this.setState({ 
-                modal: false, newEvent: {} 
+            this.setState({
+                modal: false, newEvent: {}
             }, () => {
                 if (updatedGiftGallery.modal) {
                     this.props.showGiftModal(updatedGiftGallery.giftObtained);
@@ -115,9 +111,26 @@ export class CreateEvent extends Component {
         });
     }
 
+    // when checkEndTime is true (aka when end time is set BEFORE start time)
+    // button will be disabled until user puts in a correct time
+    checkEndTime = () => {
+        var startDate = new Date(this.state.newEvent.date + "T" + this.state.newEvent.start + ":00"); // ISO8601 format. example: 2018-06-01T12:30:00
+        var endDate = new Date(this.state.newEvent.date + "T" + this.state.newEvent.end + ":00"); // ISO8601 format
+
+        var startMS = startDate.getTime(); // convert start ISO8601 string to milliseconds
+        var endMS = endDate.getTime(); // convert end ISO8601 string to milliseconds
+        var result = startMS - endMS;
+
+        console.log(result);
+
+        if (startMS - endMS >= 0) {
+            return true;
+        }
+    }
+
     findEventGift = () => {
-        console.log(this.props.userData);        
-        let gifts = this.props.userData.giftGallery.giftGallery; 
+        console.log(this.props.userData);
+        let gifts = this.props.userData.giftGallery.giftGallery;
         let numOfEvents = this.props.userData.giftGallery.event + 1;
         let ifGiftObtained = false;
         let giftObtained = {};
@@ -135,7 +148,7 @@ export class CreateEvent extends Component {
             // if gift's requirement num is not reached, do nothing
             if (numOfEvents < gift.reqNum) {
                 return gift;
-            } 
+            }
 
             gift.earned = true;
             ifGiftObtained = true;
@@ -157,6 +170,7 @@ export class CreateEvent extends Component {
     }
 
     render() {
+        let endTime = this.checkEndTime();
         return (
             <div>
                 <Button color="danger" onClick={this.toggle}>+ Add a Schedule</Button>
@@ -215,15 +229,15 @@ export class CreateEvent extends Component {
                         </Form>
                     </ModalBody>
                     <ModalFooter>
-                        <Button 
-                            color="secondary" 
+                        <Button
+                            color="secondary"
                             onClick={this.cancelEventCreation}>
-                                Cancel
+                            Cancel
                         </Button>
                         <Button 
                             color="primary" 
                             onClick={this.addNewEvent}
-                            disabled={ !this.state.newEvent.title || !this.state.newEvent.date || !this.state.newEvent.start || !this.state.newEvent.end || !this.state.newEvent.description}>
+                            disabled={ endTime || !this.state.newEvent.title || !this.state.newEvent.date || !this.state.newEvent.start || !this.state.newEvent.end || !this.state.newEvent.description}>
                                 Add to schedule
                         </Button>{' '}
                         
@@ -333,7 +347,7 @@ export class CreateTask extends Component {
                             className="action-button"
                             color="primary"
                             onClick={this.addNewTask}
-                            disabled={ !this.state.newTask.task }>
+                            disabled={!this.state.newTask.task}>
                             Add Task
                         </Button>
                     </ModalFooter>
@@ -343,7 +357,7 @@ export class CreateTask extends Component {
     }
 }
 
-export class ShowTask extends Component {   
+export class ShowTask extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -351,10 +365,10 @@ export class ShowTask extends Component {
             newTask: []
         };
     }
-  
-      componentDidMount() {
+
+    componentDidMount() {
         window.scrollTo(0, 0);
-      }
+    }
 
 
     render() {
