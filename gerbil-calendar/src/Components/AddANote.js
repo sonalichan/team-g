@@ -20,9 +20,10 @@ class AddNote extends Component {
   }
 
   handleSubmit = () => {
-    this.props.addNote(this.state.input);
     this.setState({
-        modal: false
+        modal: false, 
+    }, () => {
+      this.props.addNote(this.state.input);
     })
 
   }
@@ -41,7 +42,7 @@ class AddNote extends Component {
           rel='stylesheet'
           href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css'
         />
-        <Button color="primary" onClick={this.toggle}>{this.props.buttonLabel} Add a Note</Button>
+        <Button color="primary" onClick={this.toggle}>{this.props.buttonLabel} Print</Button>
         <div className="addNoteModal">
           <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
             <ModalHeader id="noteTitle" toggle={this.toggle}><h1>Add a Note:</h1></ModalHeader>
@@ -54,17 +55,16 @@ class AddNote extends Component {
               />     
             </ModalBody>
             <ModalFooter>
-
-            <Button
-                color="secondary"
-                onClick={this.toggle}>
-                Cancel
-            </Button>
-            <Button 
-                color="primary" 
-                onClick={this.handleSubmit}>
-                Add Note
-            </Button>{' '}
+              <Button
+                  color="secondary"
+                  onClick={this.toggle}>
+                  Cancel
+              </Button>
+              <Button 
+                  color="primary" 
+                  onClick={this.handleSubmit}>
+                  Add Note
+              </Button>{' '}
             </ModalFooter>
           </Modal>
         </div>

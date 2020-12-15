@@ -20,7 +20,8 @@ export class CalendarPage extends Component {
       this.state = {
         name: "",
         modal: false,
-        noteInput: null
+        noteInput: null,
+        loadedNoteInput: false
       }
 
       this.closeModal = this.closeModal.bind(this);
@@ -28,11 +29,17 @@ export class CalendarPage extends Component {
 
     componentDidMount() {
       window.scrollTo(0, 0);
+      this.setState({
+        loadedNoteInput: false
+    })
     }
     
     addNote = (text) => {
       this.setState({
           noteInput: text
+
+      }, () => {
+        window.print()
       })
     }
 
@@ -65,7 +72,7 @@ export class CalendarPage extends Component {
           <div className="calendar-button" align="right">
             <CreateEvent 
               user={this.props.user} userData={this.props.userData} closeModal={this.closeModal} showGiftModal={this.props.showGiftModal}/>
-            <Button onClick={() => window.print()} color="secondary">&#x1f5b6; Print</Button>
+          <AddNote addNote={this.addNote}/>
           </div>
           
           
@@ -91,7 +98,6 @@ export class CalendarPage extends Component {
 
             <div id="note-section">
               <h2>A note</h2>
-              <AddNote addNote={this.addNote}/>
               <div id="notes">
                 {this.state.noteInput}
               </div>
