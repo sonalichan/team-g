@@ -74,12 +74,12 @@ class App extends Component {
                 tasksKey: [],
                 giftGallery: {
                   event: 0,
-                  logIn: 0, 
+                  task: 0, 
                   giftGallery: [
                       {
                           id: 1,
                           giftName: "South Korea",
-                          url: "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/close-up-of-tulips-blooming-in-field-royalty-free-image-1584131616.jpg?crop=1.00xw:0.798xh;0,0.202xh&resize=980:*",
+                          url: "https://lh3.googleusercontent.com/proxy/lsu2k2ltTzMtMwgpHKhxyhMqITVhItsBf0SeP7I1fygYj-1k7Kr8aUDZXKsY5leP-fCeaJ6zTS2ZFXeTcnFAzU-mg9zZMdKtIu2OrmKZnz9d_FBE_nG5eXomvRpKyacxpmNCNnXArdbWSnlFK70",
                           requirementText: "add 1 event to calendar",
                           req: "event",
                           reqNum: 1,
@@ -88,7 +88,7 @@ class App extends Component {
                       {
                           id: 2,
                           giftName: "China",
-                          url: "https://api.time.com/wp-content/uploads/2019/08/better-smartphone-photos.jpg?w=600&quality=85",
+                          url: "https://www.thesprucepets.com/thmb/P53UqgjYbR9_O7Ua_t2_LbRSYtU=/3456x1944/smart/filters:no_upscale()/GettyImages-151547675-58cecf015f9b581d72491af1.jpg",
                           requirementText: "add 5 event to calendar",
                           req: "event",
                           reqNum: 5,
@@ -97,7 +97,7 @@ class App extends Component {
                       {
                           id: 3,
                           giftName: "United States",
-                          url: "https://cnet3.cbsistatic.com/img/-qQkzFVyOPEoBRS7K5kKS0GFDvk=/940x0/2020/04/16/7d6d8ed2-e10c-4f91-b2dd-74fae951c6d8/bazaart-edit-app.jpg",
+                          url: "https://www.brodybrotherspestcontrol.com/wp-content/uploads/2019/12/Common-Mouse-Species-in-North-America.jpg",
                           requirementText: "add 20 event to calendar",
                           req: "event",
                           reqNum: 20,
@@ -106,7 +106,7 @@ class App extends Component {
                       {
                           id: 4,
                           giftName: "Japan",
-                          url: "https://i2.wp.com/www.wintersexpress.com/files/2019/08/IMG_4605.sunflower.jpg?fit=2546%2C3363&ssl=1",
+                          url: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Meriones_unguiculatus_%28wild%29.jpg/1200px-Meriones_unguiculatus_%28wild%29.jpg",
                           requirementText: "add 50 event to calendar",
                           req: "event",
                           reqNum: 50,
@@ -115,7 +115,7 @@ class App extends Component {
                       {
                           id: 5,
                           giftName: "Mexico",
-                          url: "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/close-up-of-tulips-blooming-in-field-royalty-free-image-1584131616.jpg?crop=1.00xw:0.798xh;0,0.202xh&resize=980:*",
+                          url: "https://static.boredpanda.com/blog/wp-content/uploads/2020/04/quarantine-gerbil-art-gallery-fb5.png",
                           requirementText: "add 100 event to calendar",
                           req: "event",
                           reqNum: 100,
@@ -124,46 +124,46 @@ class App extends Component {
                       {
                           id: 6,
                           giftName: "Australia",
-                          url: "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/close-up-of-tulips-blooming-in-field-royalty-free-image-1584131616.jpg?crop=1.00xw:0.798xh;0,0.202xh&resize=980:*",
+                          url: "https://i.imgur.com/QRmZA35.jpg",
                           requirementText: "Secret",
-                          req: "log-in",
+                          req: "task",
                           reqNum: 1,
                           earned: false
                       },
                       {
                           id: 7,
                           giftName: "India",
-                          url: "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/close-up-of-tulips-blooming-in-field-royalty-free-image-1584131616.jpg?crop=1.00xw:0.798xh;0,0.202xh&resize=980:*",
+                          url: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Indian_Desert_Jird.jpeg/1200px-Indian_Desert_Jird.jpeg",
                           requirementText: "Secret",
-                          req: "log-in",
+                          req: "task",
                           reqNum: 5,
                           earned: false
                       },
                       {
                           id: 8,
                           giftName: "Vietnam",
-                          url: "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/close-up-of-tulips-blooming-in-field-royalty-free-image-1584131616.jpg?crop=1.00xw:0.798xh;0,0.202xh&resize=980:*",
+                          url: "https://i.ytimg.com/vi/B42dm2sjqmw/maxresdefault.jpg",
                           requirementText: "Secret",
-                          req: "log-in",
+                          req: "task",
                           reqNum: 10,
                           earned: false
                       },
                       {
                           id: 9,
                           giftName: "New Zealand",
-                          url: "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/close-up-of-tulips-blooming-in-field-royalty-free-image-1584131616.jpg?crop=1.00xw:0.798xh;0,0.202xh&resize=980:*",
+                          url: "https://www.mandatory.com/assets/uploads/2018/03/mice1.jpg",
                           requirementText: "Secret",
-                          req: "log-in",
+                          req: "task",
                           reqNum: 15,
                           earned: false
                       },
                       {
                           id: 10,
                           giftName: "France",
-                          url: "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/close-up-of-tulips-blooming-in-field-royalty-free-image-1584131616.jpg?crop=1.00xw:0.798xh;0,0.202xh&resize=980:*",
+                          url: "https://media.npr.org/assets/img/2015/02/24/gerbil_custom-b4f8d31a5693a817ae353b639f9975f8be4fb6e0.jpg",
                           requirementText: "Secret",
-                          req: "log-in",
-                          reqNum: 20,
+                          req: "task",
+                          reqNum: 30,
                           earned: false
                       }
                   ]
@@ -195,8 +195,6 @@ class App extends Component {
                 })
               }
 
-              console.log(eventsKey);
-              console.log(dbEvents);
               // updates saved info from database to state
               this.setState(prevState => ({
                 userData: {

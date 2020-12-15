@@ -81,7 +81,7 @@ export class CreateEvent extends Component {
                 title: this.state.newEvent.title,
                 start: this.state.newEvent.date + "T" + this.state.newEvent.start + ":00",
                 end: this.state.newEvent.date + "T" + this.state.newEvent.end + ":00",
-                description: this.state.newEvent.description
+                description: this.state.newEvent.description ? this.state.newEvent.description : ""
             }
         }, () => {
             let newEventKey = firebase.database().ref('users/' + this.props.user.uid).child('events').push().key;
@@ -237,7 +237,7 @@ export class CreateEvent extends Component {
                         <Button 
                             color="primary" 
                             onClick={this.addNewEvent}
-                            disabled={ endTime || !this.state.newEvent.title || !this.state.newEvent.date || !this.state.newEvent.start || !this.state.newEvent.end || !this.state.newEvent.description}>
+                            disabled={ endTime || !this.state.newEvent.title || !this.state.newEvent.date || !this.state.newEvent.start || !this.state.newEvent.end }>
                                 Add to schedule
                         </Button>{' '}
                         
@@ -300,11 +300,69 @@ export class CreateTask extends Component {
                 let newTaskKey = firebase.database().ref('users/' + this.props.user.uid).child('tasks').push().key;
                 let updates = {};
 
+                // push newly created event to firebase
                 updates['/users/' + this.props.user.uid + '/tasks/' + newTaskKey] = this.state.newTask;
+
+                // update gift gallery
+                let updatedGiftGallery = this.findTaskGift();
+                let ifGiftObtained = false;
+                if (updatedGiftGallery.modal) {
+                    ifGiftObtained = true;
+                }
+                
+                updates['/users/' + this.props.user.uid + '/giftGallery/task'] = updatedGiftGallery.user.task;
+                updates['/users/' + this.props.user.uid + '/giftGallery/giftGallery'] = updatedGiftGallery.user.giftGallery;
+
                 firebase.database().ref().update(updates);
-                this.setState({ modal: false, newTask: {} })
+                this.setState({ 
+                    modal: false, newTask: {} 
+                },  () => {
+                    if (updatedGiftGallery.modal) {
+                        this.props.showGiftModal(updatedGiftGallery.giftObtained);
+                    }
+                });
             }
         )
+    }
+
+    findTaskGift = () => {
+        let gifts = this.props.userData.giftGallery.giftGallery;
+        let numOfTasks = this.props.userData.giftGallery.task + 1;
+        let ifGiftObtained = false;
+        let giftObtained = {};
+        gifts = gifts.map((gift) => {
+            // if gift is already earned, do nothing
+            if (gift.earned) {
+                return gift;
+            }
+
+            // if gift's requirement is not event-related, do nothing
+            if (gift.req !== "task") {
+                return gift;
+            }
+
+            // if gift's requirement num is not reached, do nothing
+            if (numOfTasks < gift.reqNum) {
+                return gift;
+            }
+
+            gift.earned = true;
+            ifGiftObtained = true;
+            giftObtained = gift;
+            return gift;
+        });
+    
+
+        let returned = {
+            "modal": ifGiftObtained,
+            "giftObtained": giftObtained,
+            "user": {
+                "task": numOfTasks,
+                "giftGallery": gifts
+            }
+        }
+
+        return returned;
     }
 
     render() {

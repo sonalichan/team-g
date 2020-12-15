@@ -59,8 +59,6 @@ export class CalendarPage extends Component {
 
       var events = this.props.userData.events;
 
-      console.log(this.state.noteInput);
-
       return (
         <div id="calendarPage">
           <h1>Hello, {this.props.user.displayName}</h1>
@@ -85,7 +83,7 @@ export class CalendarPage extends Component {
             <div id="task-section">
               <h2>Coming Up Next Week</h2>
               <CreateTask 
-                user={this.props.user}/>
+                user={this.props.user} userData={this.props.userData} showGiftModal={this.props.showGiftModal}/>
               <ShowTask 
                 userData={this.props.userData}
               />
