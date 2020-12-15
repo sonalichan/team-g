@@ -28,7 +28,7 @@ export class NavigationBar extends Component {
                     <NavbarBrand tag={Link} to="/" className="kurb-bd">
                         Gerbil Calendar
                     </NavbarBrand>
-                    <NavbarToggler/>
+                    <NavbarToggler onClick={this.toggle} />
                     <Collapse isOpen={this.state.isOpen} navbar>
                         <Nav className="mr-auto mt-2 mt-lg-0 kurb-med" navbar>
                             <NavItem>
