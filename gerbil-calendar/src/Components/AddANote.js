@@ -54,10 +54,17 @@ class AddNote extends Component {
               />     
             </ModalBody>
             <ModalFooter>
-              <Button 
-                color='primary' 
-                onClick={this.handleSubmit}>Submit</Button>{' '}
-              <Button color='secondary' onClick={this.toggle}>Cancel</Button>
+
+            <Button
+                color="secondary"
+                onClick={this.toggle}>
+                Cancel
+            </Button>
+            <Button 
+                color="primary" 
+                onClick={this.handleSubmit}>
+                Add Note
+            </Button>{' '}
             </ModalFooter>
           </Modal>
         </div>
