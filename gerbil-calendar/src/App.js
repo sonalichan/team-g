@@ -97,7 +97,7 @@ class App extends Component {
                       {
                           id: 3,
                           giftName: "United States",
-                          url: "https://www.brodybrotherspestcontrol.com/wp-content/uploads/2019/12/Common-Mouse-Species-in-North-America.jpg",
+                          url: "https://www.gerbilwelfare.com/wp-content/uploads/2019/10/are-pet-gerbils-illegal.jpg",
                           requirementText: "add 20 event to calendar",
                           req: "event",
                           reqNum: 20,
