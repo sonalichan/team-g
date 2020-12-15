@@ -79,7 +79,7 @@ class App extends Component {
                       {
                           id: 1,
                           giftName: "South Korea",
-                          url: "https://lh3.googleusercontent.com/proxy/lsu2k2ltTzMtMwgpHKhxyhMqITVhItsBf0SeP7I1fygYj-1k7Kr8aUDZXKsY5leP-fCeaJ6zTS2ZFXeTcnFAzU-mg9zZMdKtIu2OrmKZnz9d_FBE_nG5eXomvRpKyacxpmNCNnXArdbWSnlFK70",
+                          url: "https://www.pets4homes.co.uk/images/articles/2619/large/the-lovely-mongolian-gerbil-54df60d679490.jpg",
                           requirementText: "add 1 event to calendar",
                           req: "event",
                           reqNum: 1,
