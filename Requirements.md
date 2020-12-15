@@ -23,14 +23,14 @@
 ## **Calendar**
 
 ### **RQ-C-2**: Users must be able to create an event(s) 
-#### Revised and Incomplete
+#### Revised and Complete
 #### We revised this requirement to allow users to create multiple events in the same time slot, as we were able to implement the functionality for that. We also allowed the description of an event to scroll if there is more text and not limit the text to three lines.
 - Events consist of the following data: the date, if the event is a one time event, the start time, the end time, and description of the event. revised
     - The "title” refers to what the user wants to name the event
     - The "date” refers to the day the event is scheduled to occur on. 
         - Input box with placeholder “MM-DD-YY”
         - Users must be able to choose any date to create an event
-    - The "start time” and the "end time” incomplete***
+    - The "start time” and the "end time” 
         - If the user inputs a start time that is after the end time, we will not allow them to create the event
     - The "description”
         - Input box for long text
@@ -84,8 +84,8 @@
 - User will be able to view which rewards are locked or unlocked by looking at each image’s respective unlock requirements
 
 ### **RQ-RS-4**: Users must not be able to see the requirements for awarded items that we choose to keep as a secret. 
-#### Revised and Incomplete
-#### We revised the wording for parts of this to make the nature of viewing a "secret" reward easier to understand. This feature is incomplete and not all of it's functionality has been implemented yet.
+#### Revised and Complete
+#### We revised the wording for parts of this to make the nature of viewing a "secret" reward easier to understand. 
 
 - Will be shown on the bottom row of awards
 - The user will be unable to view requirements for ‘secret’ rewards
