@@ -22,7 +22,7 @@
 
 ## **Calendar**
 
-### **RQ-C-2**: Users must be able to create an event(s) 
+### **RQ-C-1**: Users must be able to create an event(s) 
 #### Revised and Complete
 #### We revised this requirement to allow users to create multiple events in the same time slot, as we were able to implement the functionality for that. We also allowed the description of an event to scroll if there is more text and not limit the text to three lines.
 - Events consist of the following data: the date, if the event is a one time event, the start time, the end time, and description of the event. revised
@@ -39,12 +39,12 @@
 - Users will be able to create multiple events in the same time slot
 - Events must be visible on the calendar once the user adds the event onto the calendar
 
-### **RQ-C-4**: Users must be able to cancel creating an event if the event is still pending creation. 
-### Complete
+### **RQ-C-2**: Users must be able to cancel creating an event if the event is still pending creation. 
+#### Complete
 - User will exit event-creating mode by cancelling(or pressing the back button on) a pending event
 - Users must not be able to see the event that they decide to cancel
 
-### **RQ-C-5**: Created events must be visible on the calendar once the user adds the event onto the calendar 
+### **RQ-C-3**: Created events must be visible on the calendar once the user adds the event onto the calendar 
 #### Revised and Complete
 #### We revised this to lift a lot of requirements we couldn't meet- for many of these, we didn't have time to correct them or were unable to find ways to implement events the way we wanted while working with the FullCalendar API. Just leaving the base requirement to have an event appear is enough for minimum functionality. Everything else that came afterwards (such as removing events) was optional.
 - Events on the calendar must include the title. Description will not be shown
@@ -57,8 +57,9 @@
 ### **RQ-PD-1**: The user must be able to print the current week view from any compatible printer. 
 #### Complete
  - System must show available printers, and go through their browser’s printing software
-### **RQ-PD-4**: Before print/download the current week calendar, the user should be able to select whether they want to add a note 
-#### Incomplete
+ 
+### **RQ-PD-2**: Before print/download the current week calendar, the user should be able to select whether they want to add a note 
+#### Complete
 
 ### Add Notes Function 
 #### Revised and Complete
