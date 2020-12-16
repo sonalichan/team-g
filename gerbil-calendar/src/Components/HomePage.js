@@ -12,9 +12,9 @@ export class HomePage extends Component {
           <div className="gerbil-message">
             <p>Hi! I am Gerbil, a social animal who loves humans!</p>
 
-            <p>I have travelled to a lot of places and people love me too (except Californians, I ate too much of their agriculture... Sorry :P)</p>
+            <p>I have travelled to a lot of places and people love me!(except Californians, I ate too much of their agriculture... Sorry :P)</p>
 
-            <p>I hope I can get to S Come and say “Hi!” once in a while to update me! </p>
+            <p>I hope I can get to come and say “Hi!” once in a while, make sure to update me! </p>
 
             <p>See you around!</p>
           </div>

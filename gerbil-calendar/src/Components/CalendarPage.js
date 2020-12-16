@@ -12,6 +12,8 @@ import 'bootstrap/dist/css/bootstrap.css';
 import AddNote from './AddANote';
 
 
+
+
 export class CalendarPage extends Component {
 
     constructor(props) {
@@ -72,7 +74,7 @@ export class CalendarPage extends Component {
           <div className="calendar-button" align="right">
             <CreateEvent 
               user={this.props.user} userData={this.props.userData} closeModal={this.closeModal} showGiftModal={this.props.showGiftModal}/>
-          <AddNote addNote={this.addNote}/>
+            <AddNote addNote={this.addNote}/>
           </div>
           
           
