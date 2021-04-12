@@ -4,7 +4,7 @@
 
 ## Team Members
 
-* Sonali Chandra (Project Manager)
+* Sonali Chandra (Project Manager + Developer)
 * Mengjiao Li (Designer)
 * Olivia Nguyen (Developer)
 
